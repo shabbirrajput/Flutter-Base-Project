@@ -1,0 +1,18 @@
+{
+  "app_name": "Flutter Base",
+  "text_get_started": "Get started",
+  "text_next": "Next",
+  "text_term_and_condition_desc": "By Continuing you agree that you have read and accept our",
+  "text_term_and_condition": " T&Cs",
+  "text_and": " and",
+  "text_privacy_policy": "  Privacy Policy",
+  "text_continue": "Continue",
+  "not_connected_internet":"No internet found...Please turn on your internet",
+  "text_select_country": "Select Country",
+  "text_welcome_note": "What is Lorem Ipsum?",
+  "text_welcome_note_desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+  "validation_email_empty":"Please enter email address",
+  "validation_valid_email":"Please enter valid email address",
+  "validation_mobile_empty":"Please enter mobile number",
+  "validation_mobile_valid":"Please enter valid mobile number"
+}
