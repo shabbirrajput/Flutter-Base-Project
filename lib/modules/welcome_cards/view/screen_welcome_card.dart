@@ -20,7 +20,7 @@ class _ScreenWelcomeCardState extends State<ScreenWelcomeCard> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    //final height = MediaQuery.of(context).size.height;
     return Material(
       color: Colors.white,
       child: Column(
@@ -28,13 +28,13 @@ class _ScreenWelcomeCardState extends State<ScreenWelcomeCard> {
           Expanded(
             child: Center(
               child: Image.asset(
-                APPImages.ic_placeholder,
+                APPImages.icPlaceholder,
                 height: 233,
                 width: 286,
               ),
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Divider(
               height: 0,
@@ -80,13 +80,13 @@ class _ScreenWelcomeCardState extends State<ScreenWelcomeCard> {
                           const Spacer(),
                           if (pos < pages.length - 1)
                             Container(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: InkWell(
                                 onTap: () => setState(() {
                                   pos = pages.length - pos > 1 ? pos + 1 : pos;
                                 }),
                                 child: Text(
-                                  getTranslate(context, APPStrings.text_next)!,
+                                  getTranslate(context, APPStrings.textNext)!,
                                   style: AppFont.regularBlack_20,
                                 ),
                               ),
@@ -94,15 +94,15 @@ class _ScreenWelcomeCardState extends State<ScreenWelcomeCard> {
                           if (pos == pages.length - 1)
                             InkWell(
                               onTap: () {
-                                Navigator.of(context).pushNamed(AppRoutes.routes_login);
+                                Navigator.of(context).pushNamed(AppRoutes.routesLogin);
                               },
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: AppColors.colorPrimary,
                                 ),
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(getTranslate(context, APPStrings.text_get_started)!,
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(getTranslate(context, APPStrings.textGetStarted)!,
                                     style: AppFont.mediumBoldWhite_20),
                               ),
                             )
@@ -155,7 +155,7 @@ class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      getTranslate(context, APPStrings.text_welcome_note)!,
+      getTranslate(context, APPStrings.textWelcomeNote)!,
       style: AppFont.boldBlack_25,
       textAlign: TextAlign.center,
     );
@@ -170,14 +170,14 @@ class Page2 extends StatelessWidget {
     return Column(
       children: [
         Text(
-          getTranslate(context, APPStrings.text_welcome_note)!,
+          getTranslate(context, APPStrings.textWelcomeNote)!,
           style: AppFont.boldBlack_25,
           textAlign: TextAlign.center,
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(30.0, 10, 30, 10),
           child: Text(
-            getTranslate(context, APPStrings.text_welcome_note_desc)!,
+            getTranslate(context, APPStrings.textWelcomeNoteDesc)!,
             style: AppFont.mediumBoldBlack_20,
             textAlign: TextAlign.center,
           ),
@@ -195,14 +195,14 @@ class Page3 extends StatelessWidget {
     return Column(
       children: [
         Text(
-          getTranslate(context, APPStrings.text_welcome_note)!,
+          getTranslate(context, APPStrings.textWelcomeNote)!,
           style: AppFont.boldBlack_25,
           textAlign: TextAlign.center,
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(30.0, 10, 30, 10),
           child: Text(
-            getTranslate(context, APPStrings.text_welcome_note_desc)!,
+            getTranslate(context, APPStrings.textWelcomeNoteDesc)!,
             style: AppFont.mediumBoldBlack_20,
             textAlign: TextAlign.center,
           ),
@@ -220,14 +220,14 @@ class Page4 extends StatelessWidget {
     return Column(
       children: [
         Text(
-          getTranslate(context, APPStrings.text_welcome_note)!,
+          getTranslate(context, APPStrings.textWelcomeNote)!,
           style: AppFont.boldBlack_25,
           textAlign: TextAlign.center,
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(30.0, 10, 30, 10),
           child: Text(
-            getTranslate(context, APPStrings.text_welcome_note_desc)!,
+            getTranslate(context, APPStrings.textWelcomeNoteDesc)!,
             style: AppFont.mediumBoldBlack_20,
             textAlign: TextAlign.center,
           ),

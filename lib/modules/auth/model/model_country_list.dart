@@ -7,15 +7,15 @@ class ModelCountryList {
     if (json['country_list'] != null) {
       countryList = <CountryList>[];
       json['country_list'].forEach((v) {
-        countryList!.add(new CountryList.fromJson(v));
+        countryList!.add(CountryList.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.countryList != null) {
-      data['country_list'] = this.countryList!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (countryList != null) {
+      data['country_list'] = countryList!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -35,10 +35,10 @@ class CountryList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['country_code'] = this.countryCode;
-    data['country_name'] = this.countryName;
-    data['country_flag'] = this.countryFlag;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['country_code'] = countryCode;
+    data['country_name'] = countryName;
+    data['country_flag'] = countryFlag;
     return data;
   }
 }

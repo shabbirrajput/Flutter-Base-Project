@@ -1,4 +1,3 @@
-
 import 'package:flutterbase/modules/auth/bloc/login_bloc.dart';
 import 'package:flutterbase/modules/auth/model/model_country_list.dart';
 import 'package:flutterbase/modules/auth/view/widget/row_country.dart';
@@ -21,15 +20,16 @@ class _ScreenLoginState extends State<ScreenLogin> {
   loginEvent(var mMobile) async {
     if (await checkConnectivity()) {
       Map<String, dynamic> mBody = {
-        AppConfig.param_email: "test@gmail.com",
-        AppConfig.param_password: "123456"
+        AppConfig.paramEmail: 'test@gmail.com',
+        AppConfig.paramPassword: '123456'
       };
       BlocProvider.of<LoginBloc>(context).add(UserLogin(body: mBody));
     } else {
       ToastController.showToast(
-          getTranslate(context, APPStrings.not_connected_internet)!);
+          getTranslate(context, APPStrings.notConnectedInternet)!);
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +40,9 @@ class _ScreenLoginState extends State<ScreenLogin> {
             child: ModalProgressHUD(
               inAsyncCall: mLoading.value,
               color: Colors.transparent,
-              progressIndicator: CircularProgressIndicator(
+              progressIndicator: const CircularProgressIndicator(
                   valueColor:
-                      new AlwaysStoppedAnimation<Color>(AppColors.colorPrimary),
+                      AlwaysStoppedAnimation<Color>(AppColors.colorPrimary),
                   backgroundColor: Colors.transparent),
               child: BlocListener<LoginBloc, LoginState>(
                 listener: (context, state) {
@@ -52,7 +52,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
                     mLoading.value = false;
                   }
                   if (state is LoginLoadSuccess) {
-                   // TODO New Screen
+                    // TODO New Screen
                   }
                   if (state is LoginFailure) {
                     ToastController.showToast(state.mError);
@@ -61,40 +61,39 @@ class _ScreenLoginState extends State<ScreenLogin> {
                 child: Scaffold(
                   backgroundColor: Colors.white,
                   appBar: AppBar(
-                    actions: [],
                     elevation: 0,
                     leading: IconButton(
-                      icon: Icon(Icons.arrow_back, color: Colors.black),
+                      icon: const Icon(Icons.arrow_back, color: Colors.black),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
                     backgroundColor: Colors.white,
                   ),
                   bottomNavigationBar: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 30.0),
-                    margin: EdgeInsets.only(bottom: 30.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    margin: const EdgeInsets.only(bottom: 30.0),
                     child: Text.rich(
                       TextSpan(
-                          text: getTranslate(context,
-                              APPStrings.text_term_and_condition_desc)!,
-                          style: TextStyle(
+                          text: getTranslate(
+                              context, APPStrings.textTermAndConditionDesc)!,
+                          style: const TextStyle(
                             fontSize: 12,
                             color: AppColors.colorGreyLight1,
                           ),
                           children: <InlineSpan>[
                             TextSpan(
                               text: getTranslate(
-                                  context, APPStrings.text_term_and_condition)!,
-                              style: TextStyle(
+                                  context, APPStrings.textTermAndCondition)!,
+                              style: const TextStyle(
                                   decoration: TextDecoration.underline),
                             ),
                             TextSpan(
-                              text: getTranslate(context, APPStrings.text_and)!,
-                              style: TextStyle(decoration: TextDecoration.none),
+                              text: getTranslate(context, APPStrings.textAnd)!,
+                              style: const TextStyle(decoration: TextDecoration.none),
                             ),
                             TextSpan(
                                 text: getTranslate(
-                                    context, APPStrings.text_privacy_policy)!,
-                                style: TextStyle(
+                                    context, APPStrings.textPrivacyPolicy)!,
+                                style: const TextStyle(
                                     decoration: TextDecoration.underline)),
                           ]),
                     ),
@@ -106,22 +105,23 @@ class _ScreenLoginState extends State<ScreenLogin> {
                         Container(
                           padding: const EdgeInsets.only(left: Dimens.margin48),
                           child: Image.asset(
-                            APPImages.ic_placeholder,
-                            height:  Dimens.margin150,
+                            APPImages.icPlaceholder,
+                            height: Dimens.margin150,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left:  Dimens.margin48,top:  Dimens.margin10),
+                          padding: const EdgeInsets.only(
+                              left: Dimens.margin48, top: Dimens.margin10),
                           child: Text(
-                            getTranslate(
-                                context, APPStrings.text_welcome_note)!,
+                            getTranslate(context, APPStrings.textWelcomeNote)!,
                             style: AppFont.boldBlack_25,
                           ),
                         ),
-                        const SizedBox(height:  Dimens.margin105),
+                        const SizedBox(height: Dimens.margin105),
                         Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal:  Dimens.margin30, vertical:  Dimens.margin15),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: Dimens.margin30,
+                              vertical: Dimens.margin15),
                           child: InkWell(
                             onTap: () {
                               showAlertDialog(context);
@@ -129,16 +129,15 @@ class _ScreenLoginState extends State<ScreenLogin> {
                             child: CustomTextFieldImage(
                               obscureText: false,
                               hintText: getTranslate(
-                                  context, APPStrings.text_select_country)!,
+                                  context, APPStrings.textSelectCountry)!,
                               labelText: getTranslate(
-                                  context, APPStrings.text_select_country)!,
+                                  context, APPStrings.textSelectCountry)!,
                               isEnabled: false,
-                              image: selectedSectionIndex.value != null &&
-                                      selectedSectionIndex.value.countryFlag !=
+                              image: selectedSectionIndex.value.countryFlag !=
                                           null
                                   ? selectedSectionIndex.value.countryFlag
                                       .toString()
-                                  : "",
+                                  : '',
                               controller: countryController,
                               keyboardType: TextInputType.name,
                             ),
@@ -154,31 +153,34 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                   height: Dimens.margin50,
                                   width: Dimens.margin70,
                                   alignment: Alignment.center,
-                                  margin:
-                                      const EdgeInsets.fromLTRB( Dimens.margin30,  Dimens.margin15, Dimens.margin15, Dimens.margin15),
+                                  margin: const EdgeInsets.fromLTRB(
+                                      Dimens.margin30,
+                                      Dimens.margin15,
+                                      Dimens.margin15,
+                                      Dimens.margin15),
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(Dimens.margin4),
+                                    borderRadius:
+                                        BorderRadius.circular(Dimens.margin4),
                                     border:
                                         Border.all(color: AppColors.colorGrey),
                                   ),
                                   child: Text(
-                                      selectedSectionIndex.value != null &&
-                                              selectedSectionIndex
+                                      selectedSectionIndex
                                                       .value.countryCode !=
                                                   null
                                           ? selectedSectionIndex
                                               .value.countryCode
                                               .toString()
-                                          : "",
+                                          : '',
                                       style: AppFont.semiBoldBlack1_16),
                                 )),
                             Flexible(
                               child: CustomTextField(
                                 obscureText: false,
-                                hintText: getTranslate(context,
-                                    APPStrings.text_enter_mobile_number)!,
-                                labelText: getTranslate(context,
-                                    APPStrings.text_enter_mobile_number)!,
+                                hintText: getTranslate(
+                                    context, APPStrings.textEnterMobileNumber)!,
+                                labelText: getTranslate(
+                                    context, APPStrings.textEnterMobileNumber)!,
                                 isEnabled: true,
                                 controller: mobileNumberController,
                                 keyboardType: TextInputType.number,
@@ -188,14 +190,15 @@ class _ScreenLoginState extends State<ScreenLogin> {
                           ],
                         ),
                         Container(
-                          margin: const EdgeInsets.symmetric(horizontal: Dimens.margin30),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: Dimens.margin30),
                           child: GestureDetector(
                             onTap: () {
                               loginValidation();
                             },
                             child: CustomButton(
-                              buttontext: getTranslate(
-                                  context, APPStrings.text_continue)!,
+                              buttonText: getTranslate(
+                                  context, APPStrings.textContinue)!,
                             ),
                           ),
                         ),
@@ -219,7 +222,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
             contentPadding: EdgeInsets.zero,
             content: Container(
               height: Dimens.margin340,
-              padding: EdgeInsets.only(top: Dimens.margin5),
+              padding: const EdgeInsets.only(top: Dimens.margin5),
               width: MediaQuery.of(context).size.width - Dimens.margin30,
               child: ListView.builder(
                   itemCount: 10,
@@ -243,15 +246,15 @@ class _ScreenLoginState extends State<ScreenLogin> {
     String mNumber = mobileNumberController.text.toString().trim();
     if (countryController.text.toString().isEmpty) {
       ToastController.showToast(
-          getTranslate(context, APPStrings.text_select_country)!);
+          getTranslate(context, APPStrings.textSelectCountry)!);
       return;
     } else if (mNumber.isEmpty) {
       ToastController.showToast(
-          getTranslate(context, ValidationString.validation_mobile_empty)!);
+          getTranslate(context, ValidationString.validationMobileEmpty)!);
       return;
     } else if (!validatePhone(mNumber)) {
       ToastController.showToast(
-          getTranslate(context, ValidationString.validation_mobile_valid)!);
+          getTranslate(context, ValidationString.validationMobileValid)!);
       return;
     } else {
       loginEvent(mNumber);

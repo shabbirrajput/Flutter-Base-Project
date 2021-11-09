@@ -12,29 +12,18 @@ import 'package:flutter/cupertino.dart'
         Column,
         Container,
         CrossAxisAlignment,
-        CupertinoButton,
         CupertinoDatePicker,
         CupertinoDatePickerMode,
-        CupertinoIcons,
-        CupertinoTheme,
         EdgeInsets,
         Expanded,
-        FontWeight,
-        Icon,
         Key,
-        MainAxisAlignment,
         Navigator,
-        Row,
         SizedBox,
-        Text,
-        TextStyle,
         Widget,
         required,
         showCupertinoModalPopup;
 
-import 'package:flutter/material.dart' show Color, Colors;
 import 'package:flutterbase/utils/common_import.dart';
-export 'package:flutter/material.dart' show Color, Colors;
 
 void showCupertinoDatePicker(
   BuildContext context, {
@@ -68,10 +57,10 @@ void showCupertinoDatePicker(
         children: <Widget>[
           Container(
             alignment: Alignment.center,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.colorWhite,
               border: Border(
-                bottom: const BorderSide(width: 0.5, color: Colors.white),
+                bottom: BorderSide(width: 0.5, color: Colors.white),
               ),
             ),
             child: GestureDetector(
@@ -81,12 +70,12 @@ void showCupertinoDatePicker(
               child: Container(
                 height: 5,
                 width: 50,
-                margin: EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2.5),
                   color: AppColors.colorGreyLight,
-                  border: Border(
-                    bottom: const BorderSide(width: 0.5, color: Colors.white),
+                  border: const Border(
+                    bottom: BorderSide(width: 0.5, color: Colors.white),
                   ),
                 ),
               ),

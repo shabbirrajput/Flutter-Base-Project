@@ -3,17 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutterbase/modules/auth/bloc/login_bloc.dart';
 import 'package:flutterbase/modules/splash/view/screen_splash.dart';
-import 'package:flutterbase/utils/common/AppLocalizations.dart';
+import 'package:flutterbase/utils/common/app_localizations.dart';
 import 'package:flutterbase/utils/common_import.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
   static ValueNotifier<Locale> notifier =
-  ValueNotifier<Locale>(Locale(APPStrings.language_en));
+  ValueNotifier<Locale>(const Locale(APPStrings.languageEn));
+
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -48,23 +50,23 @@ class MyAppState extends State<MyApp> {
             child: MaterialApp(
               title: 'Flutter 9SPL',
               locale: newLocale,
-              localizationsDelegates: [
+              localizationsDelegates: const [
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
                 AppLocalizations.delegate
               ],
-              supportedLocales: [
-                const Locale(APPStrings.language_en, ''), // English
-                const Locale(APPStrings.language_ar, '') //
+              supportedLocales: const [
+                Locale(APPStrings.languageEn, ''), // English
+                Locale(APPStrings.languageAr, '') //
               ],
               theme: ThemeData(
                 primaryColor: AppColors.colorPrimary,
                 unselectedWidgetColor: Colors.black,
                 highlightColor: Colors.white,
               ),
-              initialRoute: AppRoutes.routes_splash,
-              home: ScreenSplash(),
+              initialRoute: AppRoutes.routesSplash,
+              home: const ScreenSplash(),
               onGenerateRoute: RouteGenerator.generateRoute,
               navigatorKey: NavigatorKey.navigatorKey,
               debugShowCheckedModeBanner: false,
@@ -93,6 +95,6 @@ class MyAppState extends State<MyApp> {
   }
 
   Future<void> updateLanguage() async {
-    MyApp.notifier.value = Locale(APPStrings.language_en);
+    MyApp.notifier.value = const Locale(APPStrings.languageEn);
   }
 }

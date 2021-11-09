@@ -9,21 +9,23 @@ class ScreenSplash extends StatefulWidget {
 }
 
 class _ScreenSplashState extends State<ScreenSplash> {
+
   @override
   void initState() {
-    Timer(Duration(seconds: 2), () async {
+    Timer(const Duration(seconds: 2), () async {
       NavigatorKey.navigatorKey.currentState!.pushNamedAndRemoveUntil(
-          AppRoutes.routes_welcome_card, (route) => false);
+          AppRoutes.routesWelcomeCard, (route) => false);
     });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget background = new Container(
+    Widget background = SizedBox(
       height: double.infinity,
       width: double.infinity,
-      child: new Image.asset(
-        APPImages.ic_splash,
+      child: Image.asset(
+        APPImages.icSplash,
         fit: BoxFit
             .cover, // I thought this would fill up my Container but it doesn't
       ),

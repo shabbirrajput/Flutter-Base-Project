@@ -1,16 +1,16 @@
 class AppConfig {
-  static const String base_url = 'https://mydomain.com/api/v1/';
+  static const String baseUrl = 'https://mydomain.com/api/v1/';
 
-  static const String page_limit = "10";
-  static const int page_limit_count = 10;
+  static const String pageLimit = '10';
+  static const int pageLimitCount = 10;
 
   //API NAME
-  static const String api_login = 'modules.login';
+  static const String apiLogin = 'modules.login';
 
   //SharedPreferences  Key
-  static const String user_data = 'user_data';
+  static const String userData = 'user_data';
 
   // Login Param
-  static const String param_email = 'email';
-  static const String param_password = 'password';
+  static const String paramEmail = 'email';
+  static const String paramPassword = 'password';
 }

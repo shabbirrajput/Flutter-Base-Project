@@ -25,7 +25,7 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: Dimens.margin50,
       child: TextField(
           controller: controller,
@@ -38,17 +38,17 @@ class CustomTextField extends StatelessWidget {
             labelText: labelText,
             labelStyle: AppFont.boldBlack54_14,
             hintStyle: AppFont.boldBlack54_14,
-            contentPadding: EdgeInsets.only(left:Dimens.margin15),
-            border: OutlineInputBorder(
+            contentPadding: const EdgeInsets.only(left:Dimens.margin15),
+            border: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.colorGrey),
             ),
-            enabledBorder: OutlineInputBorder(
+            enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.colorGrey),
             ),
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.colorGrey),
             ),
-            disabledBorder: OutlineInputBorder(
+            disabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.colorGrey),
             ),
           )),

@@ -29,7 +29,7 @@ class _CustomSwitchState extends State<CustomSwitch>
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 110));
+    _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 110));
     _circleAnimation = AlignmentTween(
         begin: widget.value! ? Alignment.centerRight : Alignment.centerLeft,
         end: widget.value! ? Alignment.centerLeft : Alignment.centerRight)
@@ -68,19 +68,19 @@ class _CustomSwitchState extends State<CustomSwitch>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   _circleAnimation!.value == Alignment.centerRight
-                      ? Expanded(child: Text(""))
+                      ? const Expanded(child: Text(''))
                       : Container(),
                   Align(
                     alignment: _circleAnimation!.value,
                     child: Container(
                       width: 22.0,
                       height: 22.0,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           shape: BoxShape.circle, color: Colors.white),
                     ),
                   ),
                   _circleAnimation!.value == Alignment.centerLeft
-                      ? Expanded(child: Text(""))
+                      ? const Expanded(child: Text(''))
                       : Container(),
                 ],
               ),

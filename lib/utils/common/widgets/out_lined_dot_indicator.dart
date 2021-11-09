@@ -11,7 +11,7 @@ class OutlinedDotIndicator extends StatelessWidget {
       child: Container(
         width: 35,
         height: 35,
-        child: Text(""),
+        child: const Text(''),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(color: Colors.grey, width: 1),

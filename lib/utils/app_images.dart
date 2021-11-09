@@ -1,10 +1,10 @@
 class APPImages {
-  static const String BASE_URL = 'assets/images/';
+  static const String imageBaseURL = 'assets/images/';
 
-  static const ic_splash = BASE_URL + 'ic_splash.png';
-  static const ic_placeholder = BASE_URL + 'ic_placeholder.png';
-  static const ic_placeholder_3_2_5 = BASE_URL + 'ic_placeholder_3_2_5.png';
-  static const ic_placeholder_10_3 = BASE_URL + 'ic_placeholder_10_3.png';
-  static const ic_placeholder_10_6 = BASE_URL + 'ic_placeholder_10_6.png';
+  static const icSplash = imageBaseURL + 'ic_splash.png';
+  static const icPlaceholder = imageBaseURL + 'ic_placeholder.png';
+  static const icPlaceholder325 = imageBaseURL + 'ic_placeholder_3_2_5.png';
+  static const icPlaceholder103 = imageBaseURL + 'ic_placeholder_10_3.png';
+  static const icPlaceholder106 = imageBaseURL + 'ic_placeholder_10_6.png';
 
 }

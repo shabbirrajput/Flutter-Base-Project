@@ -27,7 +27,7 @@ class CustomTextFieldImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: Dimens.margin50,
       child: TextField(
           controller: controller,
@@ -40,9 +40,10 @@ class CustomTextFieldImage extends StatelessWidget {
             labelText: labelText,
             labelStyle: AppFont.boldBlack54_14,
             hintStyle: AppFont.boldBlack54_14,
-            contentPadding: EdgeInsets.only(left: Dimens.margin15,right: Dimens.margin24),
+            contentPadding: const EdgeInsets.only(
+                left: Dimens.margin15, right: Dimens.margin24),
             suffix: Container(
-              margin: EdgeInsets.only(top: Dimens.margin5),
+              margin: const EdgeInsets.only(top: Dimens.margin5),
               height: Dimens.margin20,
               width: Dimens.margin35,
               child: Image.network(
@@ -50,16 +51,16 @@ class CustomTextFieldImage extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-            border: OutlineInputBorder(
+            border: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.colorGrey),
             ),
-            enabledBorder: OutlineInputBorder(
+            enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.colorGrey),
             ),
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.colorGrey),
             ),
-            disabledBorder: OutlineInputBorder(
+            disabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.colorGrey),
             ),
           )),

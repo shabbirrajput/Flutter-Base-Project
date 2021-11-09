@@ -1,5 +1,5 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:flutterbase/utils/common/AppLocalizations.dart';
+import 'package:flutterbase/utils/common/app_localizations.dart';
 import 'package:flutterbase/utils/common_import.dart';
 import 'package:intl/intl.dart';
 
@@ -9,7 +9,7 @@ String? getTranslate(BuildContext context, String strTranslate) {
 
 String formatDate(var mDate, String mDateFormat) {
   try {
-    var dateFormatter = new DateFormat(mDateFormat);
+    var dateFormatter = DateFormat(mDateFormat);
     String dateFormatted = dateFormatter.format(mDate);
     return dateFormatted;
   } catch (e) {

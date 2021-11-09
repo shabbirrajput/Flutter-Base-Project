@@ -79,6 +79,7 @@ dependencies:
   fluttertoast: ^8.0.7
 
 dev_dependencies:
+  flutter_lints: ^1.0.4
   flutter_test:
     sdk: flutter
 
@@ -96,6 +97,5 @@ flutter:
   assets:
     - assets/
     - assets/images/
-    - assets/font/
     - lang/ar.json
     - lang/en.json

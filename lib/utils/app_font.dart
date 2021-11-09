@@ -14,39 +14,39 @@ class AppFont {
   //colorGray4
   static final regularBlack = regular.copyWith(color: AppColors.colorBlack);
   static final regularBlack_10 =
-      regularBlack.copyWith(fontSize: Dimens.text_size_10);
+      regularBlack.copyWith(fontSize: Dimens.textSize10);
   static final regularBlack_14 =
-      regularBlack.copyWith(fontSize: Dimens.text_size_14);
+      regularBlack.copyWith(fontSize: Dimens.textSize14);
   static final regularBlack_20 =
-  regularBlack.copyWith(fontSize: Dimens.text_size_20);
+  regularBlack.copyWith(fontSize: Dimens.textSize20);
 
   //colorWhite-------
   static final colorWhite = bold.copyWith(color: AppColors.colorWhite);
   static final colorWhite_14 =
-  colorWhite.copyWith(fontSize: Dimens.text_size_14);
+  colorWhite.copyWith(fontSize: Dimens.textSize14);
 
   //-------BOLD-------------
   //colorBlack-------
 
   static final boldBlack = bold.copyWith(color: AppColors.colorBlack);
-  static final boldBlack_10 = boldBlack.copyWith(fontSize: Dimens.text_size_10);
-  static final boldBlack_12 = boldBlack.copyWith(fontSize: Dimens.text_size_12);
-  static final boldBlack_25 = boldBlack.copyWith(fontSize: Dimens.text_size_25);
+  static final boldBlack_10 = boldBlack.copyWith(fontSize: Dimens.textSize10);
+  static final boldBlack_12 = boldBlack.copyWith(fontSize: Dimens.textSize12);
+  static final boldBlack_25 = boldBlack.copyWith(fontSize: Dimens.textSize25);
 
 
   static final boldBlack54 = bold.copyWith(color: AppColors.colorBlack54);
-  static final boldBlack54_14 = boldBlack54.copyWith(fontSize: Dimens.text_size_14);
+  static final boldBlack54_14 = boldBlack54.copyWith(fontSize: Dimens.textSize14);
   //-------mediumBold-------------
 
   //colorBlack-------
   static final mediumBoldBlack = mediumBold.copyWith(color: AppColors.colorBlack);
-  static final mediumBoldBlack_10 = mediumBoldBlack.copyWith(fontSize: Dimens.text_size_10);
-  static final mediumBoldBlack_20 = mediumBoldBlack.copyWith(fontSize: Dimens.text_size_20);
-  static final mediumBoldBlack_25 = mediumBoldBlack.copyWith(fontSize: Dimens.text_size_25);
+  static final mediumBoldBlack_10 = mediumBoldBlack.copyWith(fontSize: Dimens.textSize10);
+  static final mediumBoldBlack_20 = mediumBoldBlack.copyWith(fontSize: Dimens.textSize20);
+  static final mediumBoldBlack_25 = mediumBoldBlack.copyWith(fontSize: Dimens.textSize25);
 
   //colorWhite-------
   static final mediumBoldWhite = mediumBold.copyWith(color: AppColors.colorWhite);
-  static final mediumBoldWhite_20 = mediumBoldWhite.copyWith(fontSize: Dimens.text_size_20);
+  static final mediumBoldWhite_20 = mediumBoldWhite.copyWith(fontSize: Dimens.textSize20);
 
 
   //-------semiBold-------------
@@ -54,5 +54,5 @@ class AppFont {
   //colorBlack-------
   static final semiBoldBlack1 = semiBold.copyWith(color: AppColors.colorBlack1);
   static final semiBoldBlack1_16 =
-  semiBoldBlack1.copyWith(fontSize: Dimens.text_size_16);
+  semiBoldBlack1.copyWith(fontSize: Dimens.textSize16);
 }

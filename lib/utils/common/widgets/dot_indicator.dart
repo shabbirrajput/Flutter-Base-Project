@@ -13,7 +13,7 @@ class DotIndicator extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(6.0),
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.pink,
             ),

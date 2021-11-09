@@ -7,7 +7,7 @@ class RepositoryLogin {
 
   Future<String> callUserLoginApi(Map<String, dynamic> params) async {
     final response = await ApiProvider()
-        .callPostMethodWithOutToken(AppConfig.api_login, params);
+        .callPostMethodWithOutToken(AppConfig.apiLogin, params);
     return response;
   }
 }

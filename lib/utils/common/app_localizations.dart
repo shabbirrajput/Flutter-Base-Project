@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterbase/utils/common_import.dart';
@@ -52,14 +49,14 @@ class _AppLocalizationsDelegate
   @override
   bool isSupported(Locale locale) {
     // Include all of your supported language codes here
-    return [APPStrings.language_en, APPStrings.language_ar]
+    return [APPStrings.languageEn, APPStrings.languageAr]
         .contains(locale.languageCode);
   }
 
   @override
   Future<AppLocalizations> load(Locale locale) async {
     // AppLocalizations class is where the JSON loading actually runs
-    AppLocalizations localizations = new AppLocalizations(locale);
+    AppLocalizations localizations = AppLocalizations(locale);
     await localizations.load();
     return localizations;
   }

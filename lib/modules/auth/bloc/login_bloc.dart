@@ -1,4 +1,3 @@
-
 import 'package:flutterbase/modules/auth/model/model_login.dart';
 import 'package:flutterbase/modules/auth/repository/repository_login.dart';
 import 'package:flutterbase/utils/common_import.dart';
@@ -27,15 +26,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield LoginLoading();
       var result = await mRepositoryLogin!.callUserLoginApi(event.body);
       ModelLogin streams = ModelLogin.fromJson(jsonDecode(result));
-      if (streams != null && streams.status!) {
+      if (streams.status!) {
         mOTPLoadSuccess = LoginLoadSuccess(streams.message.toString());
         yield mOTPLoadSuccess!;
       } else {
         yield LoginFailure(mError: streams.message!);
       }
     } catch (error) {
-      print("error--"+error.toString());
-      yield LoginFailure(mError: "Error From API"+error.toString());
+      print('error--' + error.toString());
+      yield LoginFailure(mError: 'Error From API' + error.toString());
     }
   }
 }

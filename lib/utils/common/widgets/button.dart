@@ -5,11 +5,11 @@ import 'package:flutterbase/utils/common_import.dart';
 class CustomButton extends StatelessWidget {
   CustomButton({
     Key? key,
-    this.buttontext,
+    this.buttonText,
     this.color,
   }) : super(key: key);
 
-  String? buttontext;
+  String? buttonText;
   final Function? color;
 
   @override
@@ -19,26 +19,27 @@ class CustomButton extends StatelessWidget {
       alignment: Alignment.center,
       height: 50,
       width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(4)),
         color: AppColors.colorPrimary,
       ),
       child: Text(
-        '$buttontext',
+        '$buttonText',
         style: AppFont.colorWhite_14,
       ),
     );
   }
 }
 
+// ignore: must_be_immutable
 class UploadButton extends StatelessWidget {
   UploadButton({
     Key? key,
-    this.buttontext,
+    this.buttonText,
     this.color,
   }) : super(key: key);
 
-  String? buttontext;
+  String? buttonText;
   final Function? color;
 
   @override
@@ -49,14 +50,14 @@ class UploadButton extends StatelessWidget {
       height: 50,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(0)),
+        borderRadius: const BorderRadius.all(Radius.circular(0)),
         color: AppColors.colorWhite,
         border: Border.all(color: AppColors.colorGrey),
       ),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: Text(
-          '$buttontext',
+          '$buttonText',
           style: GoogleFonts.lato(color: AppColors.colorGrey, fontSize: 14),
         ),
       ),
