@@ -97,4 +97,5 @@ class MyAppState extends State<MyApp> {
   Future<void> updateLanguage() async {
     MyApp.notifier.value = const Locale(APPStrings.languageEn);
   }
+
 }
