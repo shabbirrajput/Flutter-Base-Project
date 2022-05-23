@@ -1,7 +1,5 @@
-
-
 import 'package:flutterbase/modules/auth/model/model_country_list.dart';
-import 'package:flutterbase/utils/common_import.dart';
+import 'package:flutterbase/modules/core/utils/common_import.dart';
 
 class RowCountry extends StatefulWidget {
   final int? mIndex;
@@ -10,13 +8,13 @@ class RowCountry extends StatefulWidget {
   const RowCountry({Key? key, this.mIndex, this.onPress}) : super(key: key);
 
   @override
-  _RowCountryState createState() => _RowCountryState();
+  RowCountryState createState() => RowCountryState();
 }
 
-class _RowCountryState extends State<RowCountry> {
+class RowCountryState extends State<RowCountry> {
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
         InkWell(
           onTap: () {
@@ -62,7 +60,10 @@ class _RowCountryState extends State<RowCountry> {
                 Expanded(
                   child: Text(
                     widget.mIndex! % 2 == 0 ? 'Saudi Arabia' : 'Qatar',
-                    style: AppFont.semiBoldBlack1_16,
+                    style: getTextStyle(
+                        Theme.of(context).primaryTextTheme.headline1!,
+                        Dimens.margin16,
+                        FontWeight.w600),
                   ),
                 ),
                 SizedBox(

@@ -1,4 +1,4 @@
-import 'package:flutterbase/utils/common_import.dart';
+import 'package:flutterbase/modules/core/utils/common_import.dart';
 
 
 class ScreenSplash extends StatefulWidget {
