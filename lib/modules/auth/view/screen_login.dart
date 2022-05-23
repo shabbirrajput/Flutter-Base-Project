@@ -1,35 +1,35 @@
-import 'package:flutterbase/modules/auth/bloc/login_bloc.dart';
 import 'package:flutterbase/modules/auth/model/model_country_list.dart';
 import 'package:flutterbase/modules/auth/view/widget/row_country.dart';
-import 'package:flutterbase/utils/common_import.dart';
+import 'package:flutterbase/modules/core/utils/common_import.dart';
+import '../bloc/auth_bloc.dart';
 
 class ScreenLogin extends StatefulWidget {
   const ScreenLogin({Key? key}) : super(key: key);
 
   @override
-  _ScreenLoginState createState() => _ScreenLoginState();
+  ScreenLoginState createState() => ScreenLoginState();
 }
 
-class _ScreenLoginState extends State<ScreenLogin> {
+class ScreenLoginState extends State<ScreenLogin> {
   ValueNotifier<CountryList> selectedSectionIndex =
       ValueNotifier<CountryList>(CountryList());
   ValueNotifier<bool> mLoading = ValueNotifier<bool>(false);
   TextEditingController countryController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
 
-  loginEvent(var mMobile) async {
+  ///[loginEvent] this method is used to connect to login api
+  loginEvent() async {
     if (await checkConnectivity()) {
       Map<String, dynamic> mBody = {
         AppConfig.paramEmail: 'test@gmail.com',
         AppConfig.paramPassword: '123456'
       };
-      BlocProvider.of<LoginBloc>(context).add(UserLogin(body: mBody));
+      BlocProvider.of<AuthBloc>(context).add(AuthUser(body: mBody, url: ''));
     } else {
       ToastController.showToast(
-          getTranslate(context, APPStrings.notConnectedInternet)!);
+          ValidationString.validationNoInternetFound, false);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -40,33 +40,34 @@ class _ScreenLoginState extends State<ScreenLogin> {
             child: ModalProgressHUD(
               inAsyncCall: mLoading.value,
               color: Colors.transparent,
-              progressIndicator: const CircularProgressIndicator(
-                  valueColor:
-                      AlwaysStoppedAnimation<Color>(AppColors.colorPrimary),
+              progressIndicator: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).primaryColor),
                   backgroundColor: Colors.transparent),
-              child: BlocListener<LoginBloc, LoginState>(
+              child: BlocListener<AuthBloc, AuthState>(
                 listener: (context, state) {
-                  if (state is LoginLoading) {
+                  if (state is AuthLoading) {
                     mLoading.value = true;
                   } else {
                     mLoading.value = false;
                   }
-                  if (state is LoginLoadSuccess) {
+                  if (state is AuthResponse) {
                     // TODO New Screen
                   }
-                  if (state is LoginFailure) {
-                    ToastController.showToast(state.mError);
+                  if (state is AuthFailure) {
+                    ToastController.showToast(state.mError, false);
                   }
                 },
                 child: Scaffold(
-                  backgroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).backgroundColor,
                   appBar: AppBar(
                     elevation: 0,
                     leading: IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.black),
+                      icon: Icon(Icons.arrow_back,
+                          color: Theme.of(context).cardColor),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
-                    backgroundColor: Colors.white,
+                    backgroundColor: Theme.of(context).backgroundColor,
                   ),
                   bottomNavigationBar: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -75,9 +76,9 @@ class _ScreenLoginState extends State<ScreenLogin> {
                       TextSpan(
                           text: getTranslate(
                               context, APPStrings.textTermAndConditionDesc)!,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
-                            color: AppColors.colorGreyLight1,
+                            color: Theme.of(context).canvasColor,
                           ),
                           children: <InlineSpan>[
                             TextSpan(
@@ -88,7 +89,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
                             ),
                             TextSpan(
                               text: getTranslate(context, APPStrings.textAnd)!,
-                              style: const TextStyle(decoration: TextDecoration.none),
+                              style: const TextStyle(
+                                  decoration: TextDecoration.none),
                             ),
                             TextSpan(
                                 text: getTranslate(
@@ -114,7 +116,10 @@ class _ScreenLoginState extends State<ScreenLogin> {
                               left: Dimens.margin48, top: Dimens.margin10),
                           child: Text(
                             getTranslate(context, APPStrings.textWelcomeNote)!,
-                            style: AppFont.boldBlack_25,
+                            style: getTextStyle(
+                                Theme.of(context).primaryTextTheme.headline1!,
+                                Dimens.margin24,
+                                FontWeight.bold),
                           ),
                         ),
                         const SizedBox(height: Dimens.margin105),
@@ -133,11 +138,11 @@ class _ScreenLoginState extends State<ScreenLogin> {
                               labelText: getTranslate(
                                   context, APPStrings.textSelectCountry)!,
                               isEnabled: false,
-                              image: selectedSectionIndex.value.countryFlag !=
-                                          null
-                                  ? selectedSectionIndex.value.countryFlag
-                                      .toString()
-                                  : '',
+                              image:
+                                  selectedSectionIndex.value.countryFlag != null
+                                      ? selectedSectionIndex.value.countryFlag
+                                          .toString()
+                                      : '',
                               controller: countryController,
                               keyboardType: TextInputType.name,
                             ),
@@ -146,6 +151,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
                         Row(
                           children: [
                             InkWell(
+                                splashColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
                                 onTap: () {
                                   showAlertDialog(context);
                                 },
@@ -161,18 +168,22 @@ class _ScreenLoginState extends State<ScreenLogin> {
                                   decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.circular(Dimens.margin4),
-                                    border:
-                                        Border.all(color: AppColors.colorGrey),
+                                    border: Border.all(
+                                        color: Theme.of(context).canvasColor),
                                   ),
                                   child: Text(
-                                      selectedSectionIndex
-                                                      .value.countryCode !=
-                                                  null
+                                      selectedSectionIndex.value.countryCode !=
+                                              null
                                           ? selectedSectionIndex
                                               .value.countryCode
                                               .toString()
                                           : '',
-                                      style: AppFont.semiBoldBlack1_16),
+                                      style: getTextStyle(
+                                          Theme.of(context)
+                                              .primaryTextTheme
+                                              .headline1!,
+                                          Dimens.margin24,
+                                          FontWeight.w600)),
                                 )),
                             Flexible(
                               child: CustomTextField(
@@ -246,18 +257,20 @@ class _ScreenLoginState extends State<ScreenLogin> {
     String mNumber = mobileNumberController.text.toString().trim();
     if (countryController.text.toString().isEmpty) {
       ToastController.showToast(
-          getTranslate(context, APPStrings.textSelectCountry)!);
+          getTranslate(context, APPStrings.textSelectCountry)!, false);
       return;
     } else if (mNumber.isEmpty) {
       ToastController.showToast(
-          getTranslate(context, ValidationString.validationMobileEmpty)!);
+          getTranslate(context, ValidationString.validationMobileEmpty)!,
+          false);
       return;
     } else if (!validatePhone(mNumber)) {
       ToastController.showToast(
-          getTranslate(context, ValidationString.validationMobileValid)!);
+          getTranslate(context, ValidationString.validationMobileValid)!,
+          false);
       return;
     } else {
-      loginEvent(mNumber);
+      loginEvent();
     }
   }
 }

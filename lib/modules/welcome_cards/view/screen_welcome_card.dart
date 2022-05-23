@@ -1,15 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutterbase/utils/common/common_service.dart';
-import 'package:flutterbase/utils/common_import.dart';
+import 'package:flutterbase/modules/core/utils/common_import.dart';
 
 class ScreenWelcomeCard extends StatefulWidget {
   const ScreenWelcomeCard({Key? key}) : super(key: key);
 
   @override
-  _ScreenWelcomeCardState createState() => _ScreenWelcomeCardState();
+  ScreenWelcomeCardState createState() => ScreenWelcomeCardState();
 }
 
-class _ScreenWelcomeCardState extends State<ScreenWelcomeCard> {
+class ScreenWelcomeCardState extends State<ScreenWelcomeCard> {
   int pos = 0;
   final pages = [
     const Page1(),
@@ -22,7 +20,7 @@ class _ScreenWelcomeCardState extends State<ScreenWelcomeCard> {
   Widget build(BuildContext context) {
     //final height = MediaQuery.of(context).size.height;
     return Material(
-      color: Colors.white,
+      color: Theme.of(context).backgroundColor,
       child: Column(
         children: [
           Expanded(
@@ -34,12 +32,12 @@ class _ScreenWelcomeCardState extends State<ScreenWelcomeCard> {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
+           Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Divider(
               height: 0,
               thickness: 0,
-              color: AppColors.colorGreyLight1,
+              color: Theme.of(context).canvasColor,
             ),
           ),
           const SizedBox(height: 10),
@@ -87,23 +85,36 @@ class _ScreenWelcomeCardState extends State<ScreenWelcomeCard> {
                                 }),
                                 child: Text(
                                   getTranslate(context, APPStrings.textNext)!,
-                                  style: AppFont.regularBlack_20,
+                                  style: getTextStyle(
+                                      Theme.of(context)
+                                          .primaryTextTheme
+                                          .headline1!,
+                                      Dimens.margin20,
+                                      FontWeight.w400),
                                 ),
                               ),
                             ),
                           if (pos == pages.length - 1)
                             InkWell(
                               onTap: () {
-                                Navigator.of(context).pushNamed(AppRoutes.routesLogin);
+                                Navigator.of(context)
+                                    .pushNamed(AppRoutes.routesLogin);
                               },
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: AppColors.colorPrimary,
+                                  color: Theme.of(context).primaryColor,
                                 ),
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text(getTranslate(context, APPStrings.textGetStarted)!,
-                                    style: AppFont.mediumBoldWhite_20),
+                                child: Text(
+                                    getTranslate(
+                                        context, APPStrings.textGetStarted)!,
+                                    style: getTextStyle(
+                                        Theme.of(context)
+                                            .primaryTextTheme
+                                            .headline2!,
+                                        Dimens.margin20,
+                                        FontWeight.w500)),
                               ),
                             )
                         ],
@@ -156,7 +167,8 @@ class Page1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       getTranslate(context, APPStrings.textWelcomeNote)!,
-      style: AppFont.boldBlack_25,
+      style: getTextStyle(Theme.of(context).primaryTextTheme.headline1!,
+          Dimens.margin25, FontWeight.w600),
       textAlign: TextAlign.center,
     );
   }
@@ -171,14 +183,16 @@ class Page2 extends StatelessWidget {
       children: [
         Text(
           getTranslate(context, APPStrings.textWelcomeNote)!,
-          style: AppFont.boldBlack_25,
+          style: getTextStyle(Theme.of(context).primaryTextTheme.headline1!,
+              Dimens.margin25, FontWeight.w600),
           textAlign: TextAlign.center,
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(30.0, 10, 30, 10),
           child: Text(
             getTranslate(context, APPStrings.textWelcomeNoteDesc)!,
-            style: AppFont.mediumBoldBlack_20,
+            style: getTextStyle(Theme.of(context).primaryTextTheme.headline1!,
+                Dimens.margin20, FontWeight.w600),
             textAlign: TextAlign.center,
           ),
         ),
@@ -196,14 +210,16 @@ class Page3 extends StatelessWidget {
       children: [
         Text(
           getTranslate(context, APPStrings.textWelcomeNote)!,
-          style: AppFont.boldBlack_25,
+          style: getTextStyle(Theme.of(context).primaryTextTheme.headline1!,
+              Dimens.margin25, FontWeight.w600),
           textAlign: TextAlign.center,
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(30.0, 10, 30, 10),
           child: Text(
             getTranslate(context, APPStrings.textWelcomeNoteDesc)!,
-            style: AppFont.mediumBoldBlack_20,
+            style: getTextStyle(Theme.of(context).primaryTextTheme.headline1!,
+                Dimens.margin20, FontWeight.w600),
             textAlign: TextAlign.center,
           ),
         ),
@@ -221,14 +237,16 @@ class Page4 extends StatelessWidget {
       children: [
         Text(
           getTranslate(context, APPStrings.textWelcomeNote)!,
-          style: AppFont.boldBlack_25,
+          style: getTextStyle(Theme.of(context).primaryTextTheme.headline1!,
+              Dimens.margin25, FontWeight.w600),
           textAlign: TextAlign.center,
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(30.0, 10, 30, 10),
           child: Text(
             getTranslate(context, APPStrings.textWelcomeNoteDesc)!,
-            style: AppFont.mediumBoldBlack_20,
+            style: getTextStyle(Theme.of(context).primaryTextTheme.headline1!,
+                Dimens.margin20, FontWeight.w600),
             textAlign: TextAlign.center,
           ),
         ),
