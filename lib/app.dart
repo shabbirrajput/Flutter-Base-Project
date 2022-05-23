@@ -77,7 +77,7 @@ class MyAppState extends State<MaterialAppWidget> {
                   apiProvider: apiProvider, client: client, repositoryAuth: RepositoryAuth()),
             ),
           ],
-          child: MultiValueListenableBuider(
+          child: MultiValueListenableBuilder(
               valueListenables: [isDrawerClose],
               builder: (BuildContext context, values, Widget? child) {
                 return BlocBuilder<ThemeCubit, ThemeState>(
@@ -137,10 +137,11 @@ class MyAppState extends State<MaterialAppWidget> {
       backgroundColor: AppColors.colorWhite,
       canvasColor: AppColors.colorGrey,
       cardColor: AppColors.colorBlack,
+      indicatorColor: AppColors.colorRed,
       primaryTextTheme: TextTheme(
         headline1: AppFont.regularBlack,
         headline2: AppFont.colorWhite,
-
+        headline3: AppFont.colorRed,
       ),
       scaffoldBackgroundColor: Colors.white,
     );
@@ -156,6 +157,7 @@ class MyAppState extends State<MaterialAppWidget> {
       primaryTextTheme: TextTheme(
         headline1: AppFont.regularBlack,
         headline2: AppFont.colorWhite,
+        headline3: AppFont.colorRed,
       ),
       scaffoldBackgroundColor: Colors.white,
     );

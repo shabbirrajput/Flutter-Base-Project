@@ -12,10 +12,12 @@ class AppFont {
 
   ///-------REGULAR-------------
   ///colorGray4
+  static final colorRed = regular.copyWith(color: AppColors.colorRed);
   static final regularBlack = regular.copyWith(color: AppColors.colorBlack);
 
   ///colorWhite-------
   static final colorWhite = bold.copyWith(color: AppColors.colorWhite);
+  static final colorBlack = bold.copyWith(color: AppColors.colorBlack);
 
   ///-------BOLD-------------
   ///colorBlack-------

@@ -1,6 +1,5 @@
 import 'dart:math';
 
-
 import 'package:flutterbase/modules/core/api_service/preference_helper.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:intl/intl.dart';
@@ -10,8 +9,9 @@ import '../common/widgets/app_localizations.dart';
 import '../utils/common_import.dart';
 
 /// A [getTranslate] This Method use to get Translate String
-String? getTranslate(BuildContext context, String strTranslate) {
-  return AppLocalizations.of(context)!.translate(strTranslate);
+String? getTranslate(String strTranslate) {
+  return AppLocalizations.of(NavigatorKey.navigatorKey.currentContext!)!
+      .translate(strTranslate);
 }
 
 ///[printWrapped] this function is used to print only in debug mode
@@ -52,7 +52,8 @@ ModelUser getUser() {
 String formatTime(var mTime, String mTimeFormat) {
   try {
     String selTime = '${mTime.hour}:${mTime.minute}:00';
-    String dateFormatted = DateFormat.jm().format(DateFormat(mTimeFormat).parse(selTime));
+    String dateFormatted =
+        DateFormat.jm().format(DateFormat(mTimeFormat).parse(selTime));
     return dateFormatted;
   } catch (e) {
     return mTime.toString();
@@ -63,7 +64,8 @@ String formatTime(var mTime, String mTimeFormat) {
 /// * [dateStr] which contains the mDate
 /// * [inPutDateFormat] which contains the input
 /// * [outPutDateFormat] which contains the output
-String convertDateFormat(String dateStr, String inPutDateFormat, String outPutDateFormat) {
+String convertDateFormat(
+    String dateStr, String inPutDateFormat, String outPutDateFormat) {
   try {
     DateTime tempDate = DateFormat(inPutDateFormat).parse(dateStr);
     var date = tempDate.toUtc();
@@ -114,8 +116,9 @@ Future<bool> checkConnectivity() async {
 }
 
 /// A [getTextStyle] This Method Use to getTextStyle
-TextStyle getTextStyle(TextStyle mainTextStyle, double size,FontWeight fontWeight) {
-  return mainTextStyle.copyWith(fontSize: size,fontWeight: fontWeight);
+TextStyle getTextStyle(
+    TextStyle mainTextStyle, double size, FontWeight fontWeight) {
+  return mainTextStyle.copyWith(fontSize: size, fontWeight: fontWeight);
 }
 
 /// A [getFileImageSize] is a method that calculates MB from bytes
@@ -124,15 +127,16 @@ double getFileImageSize(var bytes) {
   return mb;
 }
 
-
 /// A [validatePhone] widget is a widget that describes part of validate Phone number
-bool validatePhone(String data) => RegExp(r'(^(?:[+0]9)?[0-9]{8,12}$)').hasMatch(data);
+bool validatePhone(String data) =>
+    RegExp(r'(^(?:[+0]9)?[0-9]{8,12}$)').hasMatch(data);
 
 /// A [validateEmail] widget is a widget that describes part of validate Phone number
-bool validateEmail(String data) =>
-    RegExp(r'^[a-z0-9](\.?[a-z0-9_-]){0,}@[a-z0-9-]+\.([a-z]{2,6}\.)?[a-z]{2,6}$').hasMatch(data);
+bool validateEmail(String data) => RegExp(
+        r'^[a-z0-9](\.?[a-z0-9_-]){0,}@[a-z0-9-]+\.([a-z]{2,6}\.)?[a-z]{2,6}$')
+    .hasMatch(data);
 
 /// A [validatePassword] widget is a widget that describes part of validate Phone number
-bool validatePassword(String data) =>
-    RegExp(r'(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$)')
-        .hasMatch(data);
+bool validatePassword(String data) => RegExp(
+        r'(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$)')
+    .hasMatch(data);
