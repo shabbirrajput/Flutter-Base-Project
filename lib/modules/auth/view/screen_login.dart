@@ -33,7 +33,7 @@ class ScreenLoginState extends State<ScreenLogin> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiValueListenableBuider(
+    return MultiValueListenableBuilder(
         valueListenables: [selectedSectionIndex, mLoading],
         builder: (BuildContext context, values, Widget? child) {
           return SafeArea(
@@ -75,7 +75,7 @@ class ScreenLoginState extends State<ScreenLogin> {
                     child: Text.rich(
                       TextSpan(
                           text: getTranslate(
-                              context, APPStrings.textTermAndConditionDesc)!,
+                              APPStrings.textTermAndConditionDesc)!,
                           style: TextStyle(
                             fontSize: 12,
                             color: Theme.of(context).canvasColor,
@@ -83,18 +83,18 @@ class ScreenLoginState extends State<ScreenLogin> {
                           children: <InlineSpan>[
                             TextSpan(
                               text: getTranslate(
-                                  context, APPStrings.textTermAndCondition)!,
+                                  APPStrings.textTermAndCondition)!,
                               style: const TextStyle(
                                   decoration: TextDecoration.underline),
                             ),
                             TextSpan(
-                              text: getTranslate(context, APPStrings.textAnd)!,
+                              text: getTranslate(APPStrings.textAnd)!,
                               style: const TextStyle(
                                   decoration: TextDecoration.none),
                             ),
                             TextSpan(
-                                text: getTranslate(
-                                    context, APPStrings.textPrivacyPolicy)!,
+                                text:
+                                    getTranslate(APPStrings.textPrivacyPolicy)!,
                                 style: const TextStyle(
                                     decoration: TextDecoration.underline)),
                           ]),
@@ -115,7 +115,7 @@ class ScreenLoginState extends State<ScreenLogin> {
                           padding: const EdgeInsets.only(
                               left: Dimens.margin48, top: Dimens.margin10),
                           child: Text(
-                            getTranslate(context, APPStrings.textWelcomeNote)!,
+                            getTranslate(APPStrings.textWelcomeNote)!,
                             style: getTextStyle(
                                 Theme.of(context).primaryTextTheme.headline1!,
                                 Dimens.margin24,
@@ -133,10 +133,10 @@ class ScreenLoginState extends State<ScreenLogin> {
                             },
                             child: CustomTextFieldImage(
                               obscureText: false,
-                              hintText: getTranslate(
-                                  context, APPStrings.textSelectCountry)!,
-                              labelText: getTranslate(
-                                  context, APPStrings.textSelectCountry)!,
+                              hintText:
+                                  getTranslate(APPStrings.textSelectCountry)!,
+                              labelText:
+                                  getTranslate(APPStrings.textSelectCountry)!,
                               isEnabled: false,
                               image:
                                   selectedSectionIndex.value.countryFlag != null
@@ -189,9 +189,9 @@ class ScreenLoginState extends State<ScreenLogin> {
                               child: CustomTextField(
                                 obscureText: false,
                                 hintText: getTranslate(
-                                    context, APPStrings.textEnterMobileNumber)!,
+                                    APPStrings.textEnterMobileNumber)!,
                                 labelText: getTranslate(
-                                    context, APPStrings.textEnterMobileNumber)!,
+                                    APPStrings.textEnterMobileNumber)!,
                                 isEnabled: true,
                                 controller: mobileNumberController,
                                 keyboardType: TextInputType.number,
@@ -208,8 +208,8 @@ class ScreenLoginState extends State<ScreenLogin> {
                               loginValidation();
                             },
                             child: CustomButton(
-                              buttonText: getTranslate(
-                                  context, APPStrings.textContinue)!,
+                              buttonText:
+                                  getTranslate(APPStrings.textContinue)!,
                             ),
                           ),
                         ),
@@ -257,17 +257,15 @@ class ScreenLoginState extends State<ScreenLogin> {
     String mNumber = mobileNumberController.text.toString().trim();
     if (countryController.text.toString().isEmpty) {
       ToastController.showToast(
-          getTranslate(context, APPStrings.textSelectCountry)!, false);
+          getTranslate(APPStrings.textSelectCountry)!, false);
       return;
     } else if (mNumber.isEmpty) {
       ToastController.showToast(
-          getTranslate(context, ValidationString.validationMobileEmpty)!,
-          false);
+          getTranslate(ValidationString.validationMobileEmpty)!, false);
       return;
     } else if (!validatePhone(mNumber)) {
       ToastController.showToast(
-          getTranslate(context, ValidationString.validationMobileValid)!,
-          false);
+          getTranslate(ValidationString.validationMobileValid)!, false);
       return;
     } else {
       loginEvent();
