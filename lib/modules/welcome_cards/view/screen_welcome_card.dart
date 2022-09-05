@@ -1,6 +1,7 @@
+import 'package:flutterbase/modules/core/theme_cubit/theme_cubit.dart';
 import 'package:flutterbase/modules/core/utils/common_import.dart';
-import 'package:flutterbase/modules/core/utils/print_log.dart';
 
+///[ScreenWelcomeCard] This class is use to Screen Welcome Card
 class ScreenWelcomeCard extends StatefulWidget {
   const ScreenWelcomeCard({Key? key}) : super(key: key);
 
@@ -17,6 +18,17 @@ class ScreenWelcomeCardState extends State<ScreenWelcomeCard> {
     const Page4(),
   ];
 
+  @override
+  void initState() {
+    try {
+      mDarkTheme.value = Hive.box(AppConfig.hiveThemeBox).get(AppConfig.hiveThemeData) ?? false;
+    } catch (e) {
+      ///Error Manage
+    }
+    super.initState();
+  }
+
+  ValueNotifier<bool> mDarkTheme = ValueNotifier(false);
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void setCurrentPos(int data) {
@@ -99,7 +111,7 @@ class ScreenWelcomeCardState extends State<ScreenWelcomeCard> {
                           ),
                           padding: const EdgeInsets.all(8.0),
                           child: Text(getTranslate(APPStrings.textGetStarted)!,
-                              style: getTextStyle(Theme.of(context).primaryTextTheme.headline2!,
+                              style: getTextStyle(Theme.of(context).primaryTextTheme.headline1!,
                                   Dimens.margin20, FontWeight.w500)),
                         ),
                       )
@@ -117,11 +129,27 @@ class ScreenWelcomeCardState extends State<ScreenWelcomeCard> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
+            DrawerHeader(
+              decoration: const BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Text('Drawer Header'),
+              child: Column(
+                children: [
+                  Text(mDarkTheme.value ? 'View Dark Mode' : 'View Light Mode'),
+                  CustomSwitch(
+                    isSwitchOn: mDarkTheme.value,
+                    onPress: () {
+                      mDarkTheme.value = !mDarkTheme.value;
+
+                      Hive.box(AppConfig.hiveThemeBox)
+                          .put(AppConfig.hiveThemeData, mDarkTheme.value);
+                      mDarkTheme.value
+                          ? BlocProvider.of<ThemeCubit>(context).setThemeDataDark()
+                          : BlocProvider.of<ThemeCubit>(context).setThemeDataLight();
+                    },
+                  ),
+                ],
+              ),
             ),
             ListTile(
               title: const Text('Page 1'),
@@ -154,61 +182,69 @@ class ScreenWelcomeCardState extends State<ScreenWelcomeCard> {
 
     return Material(
       color: Theme.of(context).backgroundColor,
-      child: Responsive(
-        mobile: Scaffold(
-          key: _scaffoldKey,
-          appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () => _scaffoldKey.currentState!.openDrawer(),
-            ),
-          ),
-          drawer: mDrawer(),
-          body: Column(
-            children: [
-              Expanded(
-                child: image(),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Divider(
-                  height: 0,
-                  thickness: 0,
-                  color: Theme.of(context).canvasColor,
+      child: MultiValueListenableBuilder(
+        valueListenables: [
+          mDarkTheme,
+        ],
+        builder: (context, values, Widget? child) {
+          return Responsive(
+            mobile: Scaffold(
+              key: _scaffoldKey,
+              appBar: AppBar(
+                leading: IconButton(
+                  icon: const Icon(Icons.menu),
+                  onPressed: () => _scaffoldKey.currentState!.openDrawer(),
                 ),
               ),
-              const SizedBox(height: 10),
-              Expanded(
-                child: page(),
+              drawer: mDrawer(),
+              body: Column(
+                children: [
+                  Expanded(
+                    child: image(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Divider(
+                      height: 0,
+                      thickness: 0,
+                      color: Theme.of(context).canvasColor,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: page(),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        desktop: Row(
-          children: [
-            mDrawer(),
-            Expanded(
-              child: image(),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Divider(
-                height: 0,
-                thickness: 0,
-                color: Theme.of(context).canvasColor,
-              ),
+            desktop: Row(
+              children: [
+                mDrawer(),
+                Expanded(
+                  child: image(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Divider(
+                    height: 0,
+                    thickness: 0,
+                    color: Theme.of(context).canvasColor,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: page(),
+                ),
+              ],
             ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: page(),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
 }
 
+///[BottomIndicator] this class is use to BottomIndicator UI
 class BottomIndicator extends StatelessWidget {
   final int length;
   final int pos;
@@ -235,6 +271,7 @@ class BottomIndicator extends StatelessWidget {
   }
 }
 
+///[Page1] this class is use to Page1 UI
 class Page1 extends StatelessWidget {
   const Page1({Key? key}) : super(key: key);
 
@@ -252,6 +289,7 @@ class Page1 extends StatelessWidget {
   }
 }
 
+///[Page2] this class is use to Page2 UI
 class Page2 extends StatelessWidget {
   const Page2({Key? key}) : super(key: key);
 
@@ -279,6 +317,7 @@ class Page2 extends StatelessWidget {
   }
 }
 
+///[Page3] this class is use to Page3 UI
 class Page3 extends StatelessWidget {
   const Page3({Key? key}) : super(key: key);
 
@@ -306,6 +345,7 @@ class Page3 extends StatelessWidget {
   }
 }
 
+///[Page4] this class is use to Page4 UI
 class Page4 extends StatelessWidget {
   const Page4({Key? key}) : super(key: key);
 

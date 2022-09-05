@@ -3,7 +3,6 @@ import 'package:flutterbase/modules/auth/bloc/auth_bloc.dart';
 import 'package:flutterbase/modules/core/api_service/preference_helper.dart';
 import 'package:flutterbase/modules/core/common/widgets/app_localizations.dart';
 import 'package:flutterbase/modules/core/utils/common_import.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -46,13 +45,13 @@ class MyAppState extends State<MaterialAppWidget> {
 
   ValueNotifier<bool> isDrawerClose = ValueNotifier<bool>(false);
 
+  static bool themeChangeValue = false;
   @override
   void initState() {
     init();
-    bool value = Hive.box('themeBox').get('themeData') ?? true;
-    value
-        ? BlocProvider.of<ThemeCubit>(context).setThemeDataLight()
-        : BlocProvider.of<ThemeCubit>(context).setThemeDataDark();
+    themeChangeValue = getThemeData(def: false);
+
+    setThemeData(context, isDark: themeChangeValue);
 
     super.initState();
   }
@@ -104,7 +103,6 @@ class MyAppState extends State<MaterialAppWidget> {
                       initialRoute: AppRoutes.routesSplash,
                       home: const ScreenSplash(),
                       onGenerateRoute: RouteGenerator.generateRoute,
-
                     );
                   },
                 );
@@ -133,7 +131,7 @@ class MyAppState extends State<MaterialAppWidget> {
   ///[lightThemeData] This method use to ThemeData of light Theme Data
   ThemeData lightThemeData(BuildContext context) {
     return ThemeData.light().copyWith(
-      primaryColor: AppColors.colorPrimary,
+      primaryColor: AppColors.colorPrimary2,
       backgroundColor: AppColors.colorWhite,
       canvasColor: AppColors.colorGrey,
       cardColor: AppColors.colorBlack,
@@ -151,15 +149,15 @@ class MyAppState extends State<MaterialAppWidget> {
   ThemeData darkThemeData(BuildContext context) {
     return ThemeData.light().copyWith(
       primaryColor: AppColors.colorPrimary,
-      backgroundColor: AppColors.colorWhite,
+      backgroundColor: AppColors.colorBlack,
       canvasColor: AppColors.colorGrey,
-      cardColor: AppColors.colorBlack,
+      cardColor: AppColors.colorWhite,
       primaryTextTheme: TextTheme(
-        headline1: AppFont.regularBlack,
-        headline2: AppFont.colorWhite,
-        headline3: AppFont.colorRed,
+        headline1: AppFont.colorWhite,
+        headline2: AppFont.regularBlack,
+        headline3: AppFont.colorGreen,
       ),
-      scaffoldBackgroundColor: Colors.white,
+      scaffoldBackgroundColor: Colors.black,
     );
   }
 

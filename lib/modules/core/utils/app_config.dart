@@ -1,7 +1,6 @@
 class AppConfig {
   static const String baseUrl = 'https://mydomain.com/api/v1/';
 
-
   ///Header Key and Value
   static const String xContentType = 'Content-Type';
   static const String xApplicationJson = 'application/json';
@@ -14,6 +13,10 @@ class AppConfig {
   static const String xAcceptDeviceIOS = '1';
   static const String xAcceptDeviceAndroid = '2';
   static const String xAcceptDeviceWeb = '3';
+
+  /// Dark Theme Hive
+  static const String hiveThemeBox = 'themeBox';
+  static const String hiveThemeData = 'themeData';
 
   static const String pageLimit = '10';
   static const int pageLimitCount = 10;

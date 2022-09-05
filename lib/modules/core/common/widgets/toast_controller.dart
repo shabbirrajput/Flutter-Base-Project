@@ -3,11 +3,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../utils/common_import.dart';
 
 /// A [ToastController] widget is a widget that describes part of the user interface by ToastController
-/// * [message] which contains the Toast Text
+/// * [mModelStaffMember] which contains the Toast Text
 /// * [BuildContext] which contains the Toast context
 /// * [bool] which contains the isSuccess or not
 class ToastController {
-  static showToast(String message, bool isSuccess) {
+  static showToast(String message, bool isSuccess, {int time = 2}) {
     if (kIsWeb) {
       Fluttertoast.showToast(
           msg: message,
@@ -26,11 +26,23 @@ class ToastController {
       final snackBar = SnackBar(
         content: Text(
           message,
-         /// style: AppFont.boldWhite_15,
+          style: getTextStyle(
+              Theme.of(NavigatorKey.navigatorKey.currentContext!).primaryTextTheme.headline2!,
+              Dimens.margin15,
+              FontWeight.w500),
         ),
-        backgroundColor: isSuccess ? Colors.green : AppColors.colorPrimary,
+        backgroundColor: isSuccess ? Colors.green : Colors.red,
+        duration: Duration(seconds: time),
       );
       ScaffoldMessenger.of(NavigatorKey.navigatorKey.currentContext!).showSnackBar(snackBar);
+    }
+  }
+
+  static removeToast(BuildContext context) {
+    if (kIsWeb) {
+      Fluttertoast.cancel();
+    } else {
+      ScaffoldMessenger.of(context).clearSnackBars();
     }
   }
 }

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutterbase/modules/core/api_service/preference_helper.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutterbase/modules/core/theme_cubit/theme_cubit.dart';
 import 'package:intl/intl.dart';
 
 import '../../auth/model/model_user.dart';
@@ -10,8 +11,7 @@ import '../utils/common_import.dart';
 
 /// A [getTranslate] This Method use to get Translate String
 String? getTranslate(String strTranslate) {
-  return AppLocalizations.of(NavigatorKey.navigatorKey.currentContext!)!
-      .translate(strTranslate);
+  return AppLocalizations.of(NavigatorKey.navigatorKey.currentContext!)!.translate(strTranslate);
 }
 
 ///[printWrapped] this function is used to print only in debug mode
@@ -52,11 +52,75 @@ ModelUser getUser() {
 String formatTime(var mTime, String mTimeFormat) {
   try {
     String selTime = '${mTime.hour}:${mTime.minute}:00';
-    String dateFormatted =
-        DateFormat.jm().format(DateFormat(mTimeFormat).parse(selTime));
+    String dateFormatted = DateFormat.jm().format(DateFormat(mTimeFormat).parse(selTime));
     return dateFormatted;
   } catch (e) {
     return mTime.toString();
+  }
+}
+
+///[getNavigatorKeyContext] is used to getting current context
+BuildContext getNavigatorKeyContext() {
+  return NavigatorKey.navigatorKey.currentContext!;
+}
+
+/// A [formatTime24H] widget is a widget that describes part of the formatTime
+/// * [mTime] which contains the time
+/// * [mTimeFormat] which contains the Format
+String formatTime24H(var mTime) {
+  try {
+    DateTime now = DateTime.now();
+    var pickUpDateTime = DateTime(now.year, now.month, now.day, mTime.hour, mTime.minute);
+    String dateFormatted = '';
+    if (DateFormat('hh:mm a').format(pickUpDateTime).toLowerCase().contains('pm')) {
+      String tmp = DateFormat('hh:mm:ss').format(pickUpDateTime);
+      if (int.parse(tmp.split(':').first) == 12) {
+        tmp =
+            (int.parse(tmp.split(':').first)).toString() + tmp.replaceAll(tmp.split(':').first, '');
+      } else {
+        tmp = (int.parse(tmp.split(':').first) + 12).toString() +
+            tmp.replaceAll(tmp.split(':').first, '');
+      }
+      dateFormatted = tmp;
+    } else if (DateFormat('hh:mm a').format(pickUpDateTime).toLowerCase().contains('am') &&
+        DateFormat('hh:mm:ss').format(pickUpDateTime).split(':').first == '12') {
+      String tmp = DateFormat('hh:mm:ss').format(pickUpDateTime);
+      tmp = (int.parse(tmp.split(':').first) - 12).toString() +
+          tmp.replaceAll(tmp.split(':').first, '');
+      dateFormatted = tmp;
+    } else {
+      dateFormatted = DateFormat('hh:mm:ss').format(pickUpDateTime);
+    }
+
+    return dateFormatted;
+  } catch (e) {
+    return mTime.toString();
+  }
+}
+
+///[getTimeDurations] This method use to get time for min and hours display
+String getTimeDurations(String dateStr, String dateFormat) {
+  try {
+    ///05:25:23
+    ///5h - 25 min
+    DateTime parseDate = DateFormat(dateFormat).parse(dateStr);
+    int hours = int.parse(DateFormat('HH').format(parseDate));
+    int minutes = int.parse(DateFormat('mm').format(parseDate));
+    String durations = '';
+
+    if (hours > 0) {
+      durations = '${hours}h';
+    }
+    if (minutes > 0) {
+      if (hours > 0) {
+        durations = '${hours}h  $minutes min';
+      } else {
+        durations = '$minutes min';
+      }
+    }
+    return durations;
+  } catch (e) {
+    return '-';
   }
 }
 
@@ -64,8 +128,7 @@ String formatTime(var mTime, String mTimeFormat) {
 /// * [dateStr] which contains the mDate
 /// * [inPutDateFormat] which contains the input
 /// * [outPutDateFormat] which contains the output
-String convertDateFormat(
-    String dateStr, String inPutDateFormat, String outPutDateFormat) {
+String convertDateFormat(String dateStr, String inPutDateFormat, String outPutDateFormat) {
   try {
     DateTime tempDate = DateFormat(inPutDateFormat).parse(dateStr);
     var date = tempDate.toUtc();
@@ -89,10 +152,30 @@ DateTime convertStringToDateFormat(String dateStr, String inPutDateFormat) {
   }
 }
 
+/// A [convertStringToTimeOfDay] widget is a widget that describes part of the convertStringToTimeOfDay
+/// * [dateStr] which contains the mDate
+TimeOfDay convertStringToTimeOfDay(String dateStr) {
+  try {
+    TimeOfDay newDate = TimeOfDay(
+      hour: int.parse(dateStr.split(':')[0]),
+      minute: int.parse(dateStr.split(':')[1]),
+    );
+
+    return newDate;
+  } catch (e) {
+    return TimeOfDay.now();
+  }
+}
+
 ///[randomImage] This method use to random Image
 String randomImage() {
   var rng = Random();
-  return 'https://picsum.photos/500/500?random=${rng.nextInt(500)}';
+  return "https://picsum.photos/500/500?random=${rng.nextInt(500)}";
+}
+
+///[getNetworkMediaUrl] This method use to getNetworkMediaUrl
+String getNetworkMediaUrl(String url) {
+  return AppConfig.baseUrl + url.replaceFirst('/', '');
 }
 
 ///[randomNumber] This method use to random Number
@@ -102,6 +185,68 @@ int randomNumber({required int maxNum, int? min}) {
         maxNum - (min ?? 0),
       ) +
       (min ?? 0);
+}
+
+///[setCurrency] This method use to set Currency code in text
+String setCurrency(String value) {
+  return '\$$value';
+}
+
+///[formatDateWithSuffix] This method use to format Date WithSuffix
+String formatDateWithSuffix(String dateStr) {
+  try {
+    ///19-07-2022 05:25:23
+    ///17th Jan 2022 | 02:45 PM
+    DateTime parseDate;
+    try {
+      parseDate = DateFormat('dd-MM-yyyy hh:mm:ss').parse(dateStr);
+      var suffix = 'th';
+      var digit = parseDate.day % 10;
+      if ((digit > 0 && digit < 4) && (parseDate.day < 11 || parseDate.day > 13)) {
+        suffix = ['st', 'nd', 'rd'][digit - 1];
+      }
+      return DateFormat("d'$suffix' MMM yyyy | hh:mm a").format(parseDate);
+    } catch (e) {
+      parseDate = DateFormat('dd-MM-yyyy').parse(dateStr);
+      var suffix = 'th';
+      var digit = parseDate.day % 10;
+      if ((digit > 0 && digit < 4) && (parseDate.day < 11 || parseDate.day > 13)) {
+        suffix = ['st', 'nd', 'rd'][digit - 1];
+      }
+      return DateFormat("d'$suffix' MMM").format(parseDate);
+    }
+  } catch (e) {
+    return '-';
+  }
+}
+
+///[formatOnlyDate] This method use to format Date WithSuffix
+String formatOnlyDate(String dateStr) {
+  try {
+    ///19-07-2022 05:25:23
+    ///17th Jan 2022 | 02:45 PM
+    DateTime parseDate = DateFormat('dd-MM-yyyy hh:mm:ss').parse(dateStr);
+    var suffix = 'th';
+    var digit = parseDate.day % 10;
+    if ((digit > 0 && digit < 4) && (parseDate.day < 11 || parseDate.day > 13)) {
+      suffix = ['st', 'nd', 'rd'][digit - 1];
+    }
+    return DateFormat("d'$suffix' MMM yyyy").format(parseDate);
+  } catch (e) {
+    return '-';
+  }
+}
+
+///[formatOnlyDate] This method use to format Date WithSuffix
+String getDateForCustomDisplayFormat(String dateStr, String dateFormat, String displayFormat) {
+  try {
+    ///19-07-2022 05:25:23
+    ///17th Jan 2022 | 02:45 PM
+    DateTime parseDate = DateFormat(dateFormat).parse(dateStr);
+    return DateFormat(displayFormat).format(parseDate);
+  } catch (e) {
+    return '-';
+  }
 }
 
 /// A [checkConnectivity] widget is a widget that describes part of check Connectivity
@@ -116,8 +261,7 @@ Future<bool> checkConnectivity() async {
 }
 
 /// A [getTextStyle] This Method Use to getTextStyle
-TextStyle getTextStyle(
-    TextStyle mainTextStyle, double size, FontWeight fontWeight) {
+TextStyle getTextStyle(TextStyle mainTextStyle, double size, FontWeight fontWeight) {
   return mainTextStyle.copyWith(fontSize: size, fontWeight: fontWeight);
 }
 
@@ -127,16 +271,42 @@ double getFileImageSize(var bytes) {
   return mb;
 }
 
+///[getThemeData] is used to get current theme data
+bool getThemeData({bool def = false}) {
+  bool result = Hive.box(AppConfig.hiveThemeBox).get(AppConfig.hiveThemeData) ?? def;
+
+  return result;
+}
+
+///[setThemeData] is used to set current theme data
+void setThemeData(BuildContext context, {bool isDark = false}) {
+  isDark
+      ? BlocProvider.of<ThemeCubit>(context).setThemeDataDark()
+      : BlocProvider.of<ThemeCubit>(context).setThemeDataLight();
+}
+
+/// A [isInteger] method is a check Integer value
+bool isInteger(num value) => value is int || value == value.roundToDouble();
+
 /// A [validatePhone] widget is a widget that describes part of validate Phone number
-bool validatePhone(String data) =>
-    RegExp(r'(^(?:[+0]9)?[0-9]{8,12}$)').hasMatch(data);
+bool validatePhone(String data) => RegExp(r'(^(?:[+0]9)?[0-9]{8,12}$)').hasMatch(data);
 
 /// A [validateEmail] widget is a widget that describes part of validate Phone number
-bool validateEmail(String data) => RegExp(
-        r'^[a-z0-9](\.?[a-z0-9_-]){0,}@[a-z0-9-]+\.([a-z]{2,6}\.)?[a-z]{2,6}$')
-    .hasMatch(data);
+bool validateEmail(String data) =>
+    RegExp(r'^[a-z0-9](\.?[a-z0-9_-]){0,}@[a-z0-9-]+\.([a-z]{2,6}\.)?[a-z]{2,6}$').hasMatch(data);
 
 /// A [validatePassword] widget is a widget that describes part of validate Phone number
-bool validatePassword(String data) => RegExp(
-        r'(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$)')
-    .hasMatch(data);
+bool validatePassword(String data) =>
+    RegExp(r'(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$)')
+        .hasMatch(data);
+
+/// A [checkIsValidUrl] widget is a widget that describes part of validate URL
+bool checkIsValidUrl(String value) {
+  var isValid = false;
+  if (RegExp(
+          r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)")
+      .hasMatch(value)) {
+    isValid = true;
+  }
+  return isValid;
+}

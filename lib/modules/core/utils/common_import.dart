@@ -22,6 +22,9 @@ export 'package:flutterbase/modules/core/common/modelCommon/modal_progress_hud.d
 export 'package:flutterbase/modules/core/common/widgets/toast_controller.dart';
 export 'package:flutterbase/modules/core/utils/multi_value_listenable_builder.dart';
 export 'package:flutterbase/modules/core/common/widgets/button.dart';
-export 'package:flutterbase/modules/core/common/widgets/textfield.dart';
 export 'package:flutterbase/modules/core/utils/validation_string.dart';
-export '../../core/common/widgets/textfield_with_image.dart';
+export 'package:flutterbase/modules/core/common/widgets/base_text_form_field.dart';
+export 'package:flutterbase/modules/core/common/widgets/base_text_form_field_prefix.dart';
+export 'package:flutterbase/modules/core/common/widgets/image_viewer_network.dart';
+export 'package:hive_flutter/hive_flutter.dart';
+export 'package:flutterbase/modules/core/common/widgets/switch.dart';

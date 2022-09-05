@@ -1,18 +1,18 @@
 import 'package:flutterbase/modules/core/utils/common_import.dart';
 
 class AppFont {
-  static final regular = GoogleFonts.roboto(
-      fontWeight: FontWeight.w400, color: AppColors.colorBlack);
-  static final bold = GoogleFonts.roboto(
-      fontWeight: FontWeight.w700, color: AppColors.colorBlack);
-  static final semiBold = GoogleFonts.roboto(
-      fontWeight: FontWeight.w600, color: AppColors.colorBlack);
-  static final mediumBold = GoogleFonts.roboto(
-      fontWeight: FontWeight.w500, color: AppColors.colorBlack);
+  static final regular =
+      GoogleFonts.roboto(fontWeight: FontWeight.w400, color: AppColors.colorBlack);
+  static final bold = GoogleFonts.roboto(fontWeight: FontWeight.w700, color: AppColors.colorBlack);
+  static final semiBold =
+      GoogleFonts.roboto(fontWeight: FontWeight.w600, color: AppColors.colorBlack);
+  static final mediumBold =
+      GoogleFonts.roboto(fontWeight: FontWeight.w500, color: AppColors.colorBlack);
 
   ///-------REGULAR-------------
   ///colorGray4
   static final colorRed = regular.copyWith(color: AppColors.colorRed);
+  static final colorGreen = regular.copyWith(color: AppColors.colorGreen);
   static final regularBlack = regular.copyWith(color: AppColors.colorBlack);
 
   ///colorWhite-------
@@ -32,8 +32,6 @@ class AppFont {
   ///-------MEDIUM BOLD-------------
   ///mediumBoldWhite-------
   static final mediumBoldWhite = mediumBold.copyWith(color: AppColors.colorWhite);
-
-
 
   ///-------SEMI BOLD-------------
   ///semiBoldBlack1-------

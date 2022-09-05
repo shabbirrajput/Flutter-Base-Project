@@ -21,21 +21,20 @@ class RowCountryState extends State<RowCountry> {
             if (widget.mIndex! % 2 == 0) {
               CountryList mCountryList = CountryList();
               mCountryList.countryCode = '567';
-              mCountryList.countryFlag =
-                  'https://cdn.ip2location.com/assets/img/flags/re.png';
+              mCountryList.countryFlag = 'https://cdn.ip2location.com/assets/img/flags/re.png';
               mCountryList.countryName = 'Saudi Arabia';
               widget.onPress!(mCountryList);
             } else {
               CountryList mCountryList = CountryList();
               mCountryList.countryCode = '987';
-              mCountryList.countryFlag =
-                  'https://cdn.ip2location.com/assets/img/flags/qa.png';
+              mCountryList.countryFlag = 'https://cdn.ip2location.com/assets/img/flags/qa.png';
               mCountryList.countryName = 'Qatar';
               widget.onPress!(mCountryList);
             }
             setState(() {});
           },
           child: Container(
+            color: Theme.of(context).backgroundColor,
             padding: const EdgeInsets.only(
                 top: Dimens.margin17,
                 bottom: Dimens.margin17,
@@ -47,12 +46,11 @@ class RowCountryState extends State<RowCountry> {
                   height: Dimens.margin8,
                   width: Dimens.margin8,
                   decoration: BoxDecoration(
-                      color: AppColors.colorGreyLight,
+                      color: Theme.of(context).indicatorColor,
                       border: Border.all(
-                        color: AppColors.colorGreyLight,
+                        color: Theme.of(context).indicatorColor,
                       ),
-                      borderRadius: const BorderRadius.all(
-                          Radius.circular(Dimens.margin4))),
+                      borderRadius: const BorderRadius.all(Radius.circular(Dimens.margin4))),
                 ),
                 const SizedBox(
                   width: 20,
@@ -60,10 +58,8 @@ class RowCountryState extends State<RowCountry> {
                 Expanded(
                   child: Text(
                     widget.mIndex! % 2 == 0 ? 'Saudi Arabia' : 'Qatar',
-                    style: getTextStyle(
-                        Theme.of(context).primaryTextTheme.headline1!,
-                        Dimens.margin16,
-                        FontWeight.w600),
+                    style: getTextStyle(Theme.of(context).primaryTextTheme.headline1!,
+                        Dimens.margin16, FontWeight.w600),
                   ),
                 ),
                 SizedBox(
@@ -82,8 +78,7 @@ class RowCountryState extends State<RowCountry> {
         ),
         Container(
           height: 1,
-          margin: const EdgeInsets.only(
-              left: Dimens.margin48, right: Dimens.margin18),
+          margin: const EdgeInsets.only(left: Dimens.margin48, right: Dimens.margin18),
           color: AppColors.colorGreyExtraLight,
         )
       ],
