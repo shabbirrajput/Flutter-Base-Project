@@ -1,10 +1,10 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutterbase/modules/auth/bloc/auth_bloc.dart';
 import 'package:flutterbase/modules/core/api_service/preference_helper.dart';
 import 'package:flutterbase/modules/core/common/widgets/app_localizations.dart';
 import 'package:flutterbase/modules/core/utils/common_import.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'modules/auth/repository/repository_auth.dart';
@@ -46,6 +46,7 @@ class MyAppState extends State<MaterialAppWidget> {
   ValueNotifier<bool> isDrawerClose = ValueNotifier<bool>(false);
 
   static bool themeChangeValue = false;
+
   @override
   void initState() {
     init();
@@ -186,6 +187,7 @@ class MyAppState extends State<MaterialAppWidget> {
     });
   }
 
+  /// It updates the language of the app.
   Future<void> updateLanguage() async {
     if (PreferenceHelper.getString(PreferenceHelper.userLanguage) != null &&
         PreferenceHelper.getString(PreferenceHelper.userLanguage)!.isNotEmpty) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// > This class contains a bunch of static variables that are used to store color values
 class AppColors {
   static const colorPrimary = Color(0xFF072346);
   static const colorPrimary2 = Color(0xFF4677B9);

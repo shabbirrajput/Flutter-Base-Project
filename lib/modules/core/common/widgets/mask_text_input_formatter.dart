@@ -1,6 +1,8 @@
 import 'dart:math';
+
 import 'package:flutter/services.dart';
 
+/// Defining a type of enum.
 enum MaskAutoCompletionType {
   lazy,
   eager,

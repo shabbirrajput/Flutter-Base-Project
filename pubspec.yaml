@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -28,13 +28,13 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
 
-  google_sign_in: ^5.4.1
+  google_sign_in: ^5.4.3
 
   # For API calling
   http: ^0.13.5
-
+  dartz: ^0.10.1
   dio: ^4.0.6
 
   # For Bloc
@@ -42,42 +42,46 @@ dependencies:
   equatable: ^2.0.5
 
   #provider:
-  provider: ^6.0.3
+  provider: ^6.0.5
 
   # For Data store
-  shared_preferences: ^2.0.15
+  shared_preferences: ^2.0.16
 
   # For Google Fonts
   google_fonts: ^3.0.1
 
   # For cached network image
-  cached_network_image: ^3.2.2
+  cached_network_image: ^3.2.3
 
   # For video player
-  video_player: ^2.4.7
+  video_player: ^2.4.10
 
   # For Network check connectivity
-  connectivity_plus: ^2.3.6+1
+  connectivity_plus: ^3.0.2
 
   intl: ^0.17.0
-  webview_flutter: ^3.0.4
+  webview_flutter: ^4.0.1
 
   # For get mime Type
-  mime: ^1.0.2
+  mime: ^1.0.4
   mime_type: ^1.0.0
 
   #  permission_handler: ^8.2.2
-  permission_handler: ^10.0.0
+  permission_handler: ^10.2.0
 
   # app info
-  package_info_plus: ^1.4.3+1
+  package_info_plus: ^3.0.2
 
-  url_launcher: ^6.1.5
+  url_launcher: ^6.1.7
 
-  fluttertoast: ^8.0.9
+  fluttertoast: ^8.1.2
 
   #For hive and  hive_flutter use to local DB
   hive_flutter: ^1.1.0
+
+
+  #For flutter flavor
+  flutter_flavor: ^3.1.1
 
 dev_dependencies:
   flutter_lints: ^2.0.1

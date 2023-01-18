@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// > This class is a stateless widget that takes in a builder function and returns a widget
+/// It takes two widgets, one for mobile and one for desktop, and returns the appropriate widget based
+/// on the screen size
 class Responsive extends StatelessWidget {
   final Widget mobile;
   final Widget desktop;
@@ -13,15 +16,12 @@ class Responsive extends StatelessWidget {
 // This size work fine on my design, maybe you need some customization depends on your design
 
   // This isMobile, isMobileTablet, isDesktop help us later
-  static bool isMobile(BuildContext context) =>
-      MediaQuery.of(context).size.width < 650;
+  static bool isMobile(BuildContext context) => MediaQuery.of(context).size.width < 650;
 
   static bool isMobileTabletView(BuildContext context) =>
-      MediaQuery.of(context).size.width < 1100 &&
-      MediaQuery.of(context).size.width >= 650;
+      MediaQuery.of(context).size.width < 1100 && MediaQuery.of(context).size.width >= 650;
 
-  static bool isDesktop(BuildContext context) =>
-      MediaQuery.of(context).size.width >= 1100;
+  static bool isDesktop(BuildContext context) => MediaQuery.of(context).size.width >= 1100;
 
   @override
   Widget build(BuildContext context) {

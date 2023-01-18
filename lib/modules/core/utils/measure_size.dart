@@ -1,14 +1,15 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 typedef OnWidgetSizeChange = void Function(Size size);
 
+/// It's a RenderObject that wraps another RenderObject and calls a callback whenever the wrapped
+/// RenderObject changes size
 class MeasureSizeRenderObject extends RenderProxyBox {
   Size? oldSize;
-   OnWidgetSizeChange onChange;
+  OnWidgetSizeChange onChange;
 
-  MeasureSizeRenderObject( this.onChange);
+  MeasureSizeRenderObject(this.onChange);
 
   @override
   void performLayout() {
@@ -24,6 +25,8 @@ class MeasureSizeRenderObject extends RenderProxyBox {
   }
 }
 
+/// It's a widget that takes a child and a callback, and when the child is rendered, it calls the
+/// callback with the size of the child
 class MeasureSize extends SingleChildRenderObjectWidget {
   final OnWidgetSizeChange onChange;
 
@@ -35,6 +38,6 @@ class MeasureSize extends SingleChildRenderObjectWidget {
 
   @override
   RenderObject createRenderObject(BuildContext context) {
-    return MeasureSizeRenderObject( onChange);
+    return MeasureSizeRenderObject(onChange);
   }
 }

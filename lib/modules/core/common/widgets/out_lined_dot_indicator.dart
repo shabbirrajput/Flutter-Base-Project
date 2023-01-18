@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 
+/// This is a widget that displays a circle with a border.
+/// `OutlinedDotIndicator` is a stateless widget that displays a dot with an outline
 class OutlinedDotIndicator extends StatelessWidget {
-  const OutlinedDotIndicator({Key? key})
-      : super(key: key);
+  const OutlinedDotIndicator({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

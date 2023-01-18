@@ -1,5 +1,8 @@
 import 'package:equatable/equatable.dart';
 
+/// A model class for user.
+/// The ModelUser class is a Dart class that extends Equatable and has a toJson() method that returns a
+/// Map<String, dynamic> and a fromJson() method that takes a Map<String, dynamic> as a parameter
 //ignore: must_be_immutable
 class ModelUser extends Equatable {
   int? id;
@@ -17,7 +20,6 @@ class ModelUser extends Equatable {
   int? type;
   String? typeText;
   String? token;
-
 
   ModelUser(
       {this.id,
@@ -77,16 +79,6 @@ class ModelUser extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        id,
-        message,
-        username,
-        mobile,
-        name,
-        companyName,
-        status,
-        statusText,
-        type,
-        typeText,
-        token];
+  List<Object?> get props =>
+      [id, message, username, mobile, name, companyName, status, statusText, type, typeText, token];
 }

@@ -4,6 +4,8 @@ import 'package:flutterbase/modules/welcome_cards/view/screen_welcome_card.dart'
 
 import 'common_import.dart';
 
+/// > RouteGenerator is a class that generates routes for the application
+/// It's a class that generates routes
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     //final args = settings.arguments;

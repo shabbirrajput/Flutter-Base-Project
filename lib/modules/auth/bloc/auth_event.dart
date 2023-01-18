@@ -1,6 +1,7 @@
 part of 'auth_bloc.dart';
 
 /// [AuthEvent] abstract class is used Event of bloc.
+/// It's an abstract class that extends Equatable and has a single property called props
 abstract class AuthEvent extends Equatable {
   const AuthEvent();
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// A pink dot with a white border.
+/// A widget that displays a dot indicator for a page view
 class DotIndicator extends StatelessWidget {
-  const DotIndicator({Key? key})
-      : super(key: key);
+  const DotIndicator({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

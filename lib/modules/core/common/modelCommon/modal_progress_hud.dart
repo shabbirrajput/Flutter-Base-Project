@@ -20,6 +20,9 @@ import 'package:flutter/material.dart';
 ///
 /// HUD=Heads Up Display
 ///
+/// A widget that shows a modal progress indicator
+/// It takes a child widget and a boolean value, and if the boolean value is true, it displays a modal
+/// progress indicator on top of the child widget
 class ModalProgressHUD extends StatelessWidget {
   final bool inAsyncCall;
   final double opacity;

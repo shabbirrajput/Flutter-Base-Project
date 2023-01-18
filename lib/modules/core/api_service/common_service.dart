@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:flutterbase/modules/core/api_service/preference_helper.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutterbase/modules/core/api_service/preference_helper.dart';
 import 'package:flutterbase/modules/core/theme_cubit/theme_cubit.dart';
 import 'package:intl/intl.dart';
 
@@ -9,12 +9,21 @@ import '../../auth/model/model_user.dart';
 import '../common/widgets/app_localizations.dart';
 import '../utils/common_import.dart';
 
-/// A [getTranslate] This Method use to get Translate String
+/// It returns the translated string for the given string.
+///
+/// Args:
+///   strTranslate (String): The string to be translated.
+///
+/// Returns:
+///   A String
 String? getTranslate(String strTranslate) {
   return AppLocalizations.of(NavigatorKey.navigatorKey.currentContext!)!.translate(strTranslate);
 }
 
-///[printWrapped] this function is used to print only in debug mode
+/// It takes a string and prints it out in chunks of 800 characters
+///
+/// Args:
+///   text (String): The text to be printed.
 void printWrapped(String text) {
   /// 800 is the size of each chunk
   final pattern = RegExp('.{1,800}');
@@ -22,9 +31,14 @@ void printWrapped(String text) {
   pattern.allMatches(text).forEach((match) => print(match.group(0)));
 }
 
-/// A [formatDate] widget is a widget that describes part of the formatDate
-/// * [mDate] which contains the mDate
-/// * [mDateFormat] which contains the mDateFormat
+/// It takes a date object and a date format string and returns a formatted date string
+///
+/// Args:
+///   mDate: The date you want to format.
+///   mDateFormat (String): The format you want to convert the date to.
+///
+/// Returns:
+///   A string
 String formatDate(var mDate, String mDateFormat) {
   try {
     var dateFormatter = DateFormat(mDateFormat);
@@ -35,7 +49,10 @@ String formatDate(var mDate, String mDateFormat) {
   }
 }
 
-/// [getUser] login user data
+/// It gets the user data from the shared preferences and returns it as a ModelUser object
+///
+/// Returns:
+///   ModelUser
 ModelUser getUser() {
   String? data = PreferenceHelper.getString(PreferenceHelper.userData);
   if (data != null && data.isNotEmpty) {
@@ -46,9 +63,15 @@ ModelUser getUser() {
   }
 }
 
-/// A [formatTime] widget is a widget that describes part of the formatTime
-/// * [mTime] which contains the time
-/// * [mTimeFormat] which contains the Format
+/// It takes a time object and a time format string as input and returns a formatted time string as
+/// output
+///
+/// Args:
+///   mTime: The time you want to format.
+///   mTimeFormat (String): The format of the time you want to convert.
+///
+/// Returns:
+///   A string
 String formatTime(var mTime, String mTimeFormat) {
   try {
     String selTime = '${mTime.hour}:${mTime.minute}:00';
@@ -59,14 +82,21 @@ String formatTime(var mTime, String mTimeFormat) {
   }
 }
 
-///[getNavigatorKeyContext] is used to getting current context
+/// It returns the context of the navigator key
+///
+/// Returns:
+///   The current context of the navigator key.
 BuildContext getNavigatorKeyContext() {
   return NavigatorKey.navigatorKey.currentContext!;
 }
 
-/// A [formatTime24H] widget is a widget that describes part of the formatTime
-/// * [mTime] which contains the time
-/// * [mTimeFormat] which contains the Format
+/// It takes a DateTime object and returns a string in the format of hh:mm:ss
+///
+/// Args:
+///   mTime: The time you want to convert.
+///
+/// Returns:
+///   A string
 String formatTime24H(var mTime) {
   try {
     DateTime now = DateTime.now();
@@ -98,7 +128,15 @@ String formatTime24H(var mTime) {
   }
 }
 
-///[getTimeDurations] This method use to get time for min and hours display
+/// It takes a date string and a date format as input and returns a string containing the time duration
+/// in hours and minutes
+///
+/// Args:
+///   dateStr (String): The date string that you want to convert.
+///   dateFormat (String): The format of the date string you're passing in.
+///
+/// Returns:
+///   A string
 String getTimeDurations(String dateStr, String dateFormat) {
   try {
     ///05:25:23
@@ -124,10 +162,16 @@ String getTimeDurations(String dateStr, String dateFormat) {
   }
 }
 
-/// A [formatDate] widget is a widget that describes part of the formatDate
-/// * [dateStr] which contains the mDate
-/// * [inPutDateFormat] which contains the input
-/// * [outPutDateFormat] which contains the output
+/// It takes a date string, converts it to a DateTime object, converts it to UTC, converts it back to
+/// local time, and then converts it to a string in the format you want
+///
+/// Args:
+///   dateStr (String): The date string that you want to convert.
+///   inPutDateFormat (String): The format of the date you are passing in.
+///   outPutDateFormat (String): The format you want to convert the date to.
+///
+/// Returns:
+///   A string
 String convertDateFormat(String dateStr, String inPutDateFormat, String outPutDateFormat) {
   try {
     DateTime tempDate = DateFormat(inPutDateFormat).parse(dateStr);
@@ -140,9 +184,14 @@ String convertDateFormat(String dateStr, String inPutDateFormat, String outPutDa
   }
 }
 
-/// A [convertStringToDateFormat] widget is a widget that describes part of the convertStringToDateFormat
-/// * [dateStr] which contains the mDate
-/// * [inPutDateFormat] which contains the input
+/// It takes a string and a date format as input and returns a DateTime object
+///
+/// Args:
+///   dateStr (String): The date string that you want to convert to a DateTime object.
+///   inPutDateFormat (String): The format of the date string you are passing in.
+///
+/// Returns:
+///   A DateTime object.
 DateTime convertStringToDateFormat(String dateStr, String inPutDateFormat) {
   try {
     DateTime newDate = DateFormat(inPutDateFormat).parse(dateStr);
@@ -152,8 +201,13 @@ DateTime convertStringToDateFormat(String dateStr, String inPutDateFormat) {
   }
 }
 
-/// A [convertStringToTimeOfDay] widget is a widget that describes part of the convertStringToTimeOfDay
-/// * [dateStr] which contains the mDate
+/// It takes a string in the format of "HH:MM" and returns a TimeOfDay object
+///
+/// Args:
+///   dateStr (String): The string that you want to convert to a TimeOfDay object.
+///
+/// Returns:
+///   A TimeOfDay object
 TimeOfDay convertStringToTimeOfDay(String dateStr) {
   try {
     TimeOfDay newDate = TimeOfDay(
