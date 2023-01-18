@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 
 import '../../core/utils/common_import.dart';
@@ -7,7 +8,6 @@ import '../model/model_user.dart';
 import '../repository/repository_auth.dart';
 
 part 'auth_event.dart';
-
 part 'auth_state.dart';
 
 /// Notifies the [AuthBloc] of a new [AuthEvent] which triggers
@@ -29,33 +29,38 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final ApiProvider mApiProvider;
   final http.Client mClient;
 
-  /// Notifies the [_onAuthNewUser] of a new [AuthUser] which triggers
+  /// _onAuthNewUser is a function that takes an AuthUser event, an Emitter<AuthState> emit, and returns
+  /// a Future<void> that emits an AuthLoading state, and then either an AuthResponse state or an
+  /// AuthFailure state
+  ///
+  /// Args:
+  ///   event (AuthUser): The event that was dispatched.
+  ///   emit (Emitter<AuthState>): This is the function that you use to emit events.
   void _onAuthNewUser(
     AuthUser event,
     Emitter<AuthState> emit,
   ) async {
+    /// Emitting an AuthLoading state.
     emit(AuthLoading());
     try {
-      ModelUser mModelUser = await mRepositoryAuth.callPostApi(event.url,
-          event.body,await mApiProvider.getHeaderValue(), mApiProvider, mClient);
-      if (mModelUser.message != null) {
-        emit(AuthFailure(mError: mModelUser.message!));
-      } else if (mModelUser.message != null) {
-        emit(AuthResponse(mModelUser: mModelUser));
-      } else {
-        emit(const AuthFailure(
-            mError: ValidationString.validationInternalServerIssue));
-      }
+      /// This is a way to handle the response from the API call.
+      Either<ModelUser, ModelCommonAuthorised> response = await mRepositoryAuth.callPostApi(
+          event.url, event.body, await mApiProvider.getHeaderValue(), mApiProvider, mClient);
+      response.fold(
+        (success) {
+          emit(AuthResponse(mModelUser: success));
+        },
+        (error) {
+          emit(AuthFailure(mError: error.message!));
+        },
+      );
     } on SocketException {
-      emit(const AuthFailure(
-          mError: ValidationString.validationNoInternetFound));
+      emit(const AuthFailure(mError: ValidationString.validationNoInternetFound));
     } catch (e) {
       if (e.toString().contains(ValidationString.validationXMLHttpRequest)) {
-        emit(const AuthFailure(
-            mError: ValidationString.validationNoInternetFound));
+        emit(const AuthFailure(mError: ValidationString.validationNoInternetFound));
       } else {
-        emit(const AuthFailure(
-            mError: ValidationString.validationInternalServerIssue));
+        emit(const AuthFailure(mError: ValidationString.validationInternalServerIssue));
       }
     }
   }

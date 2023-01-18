@@ -1,5 +1,6 @@
 import 'package:flutterbase/modules/core/utils/common_import.dart';
 
+/// > AppFont is a class that contains a static method that returns a font family name
 class AppFont {
   static final regular =
       GoogleFonts.roboto(fontWeight: FontWeight.w400, color: AppColors.colorBlack);

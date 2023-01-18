@@ -28,3 +28,4 @@ export 'package:flutterbase/modules/core/common/widgets/base_text_form_field_pre
 export 'package:flutterbase/modules/core/common/widgets/image_viewer_network.dart';
 export 'package:hive_flutter/hive_flutter.dart';
 export 'package:flutterbase/modules/core/common/widgets/switch.dart';
+export 'package:flutterbase/modules/core/common/modelCommon/model_common_authorised.dart';

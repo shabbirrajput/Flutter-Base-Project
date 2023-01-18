@@ -1,6 +1,7 @@
 import 'package:flutterbase/modules/auth/model/model_country_list.dart';
 import 'package:flutterbase/modules/core/utils/common_import.dart';
 
+/// `RowCountry` is a stateful widget that displays a row of country data
 class RowCountry extends StatefulWidget {
   final int? mIndex;
   final Function(CountryList)? onPress;
@@ -11,6 +12,9 @@ class RowCountry extends StatefulWidget {
   RowCountryState createState() => RowCountryState();
 }
 
+/// A stateful widget that displays a list of countries.
+/// `RowCountryState` is a stateful widget that extends the `State` class and is a child of the
+/// `RowCountry` class
 class RowCountryState extends State<RowCountry> {
   @override
   Widget build(BuildContext context) {

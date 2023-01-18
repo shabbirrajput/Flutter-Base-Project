@@ -1,3 +1,4 @@
+/// > A class that contains all the dimensions used in the app
 class Dimens {
   static const double margin0 = 0;
   static const double margin05 = 0.5;

@@ -1,8 +1,10 @@
 import 'package:flutterbase/modules/auth/model/model_country_list.dart';
 import 'package:flutterbase/modules/auth/view/widget/row_country.dart';
 import 'package:flutterbase/modules/core/utils/common_import.dart';
+
 import '../bloc/auth_bloc.dart';
 
+/// `ScreenLogin` is a `StatefulWidget` that creates a `ScreenLoginState` object
 class ScreenLogin extends StatefulWidget {
   const ScreenLogin({Key? key}) : super(key: key);
 
@@ -10,6 +12,8 @@ class ScreenLogin extends StatefulWidget {
   ScreenLoginState createState() => ScreenLoginState();
 }
 
+/// This class is used to show the login screen
+/// `ScreenLoginState` is a `State` class that is used to show the login screen.
 class ScreenLoginState extends State<ScreenLogin> {
   ValueNotifier<CountryList> selectedSectionIndex = ValueNotifier<CountryList>(CountryList());
   ValueNotifier<bool> mLoading = ValueNotifier<bool>(false);
@@ -17,16 +21,13 @@ class ScreenLoginState extends State<ScreenLogin> {
   TextEditingController mobileNumberController = TextEditingController();
 
   ///[loginEvent] this method is used to connect to login api
-  loginEvent() async {
-    if (await checkConnectivity()) {
-      Map<String, dynamic> mBody = {
-        AppConfig.paramEmail: 'test@gmail.com',
-        AppConfig.paramPassword: '123456'
-      };
-      BlocProvider.of<AuthBloc>(context).add(AuthUser(body: mBody, url: ''));
-    } else {
-      ToastController.showToast(ValidationString.validationNoInternetFound, false);
-    }
+  void loginEvent() async {
+    Map<String, dynamic> mBody = {
+      AppConfig.paramEmail: 'keyvacy@gmail.com',
+      AppConfig.paramPassword: 'Test@123',
+      AppConfig.xUserTimeZone: 'abc'
+    };
+    BlocProvider.of<AuthBloc>(context).add(AuthUser(body: mBody, url: AppConfig.apiUserLogin));
   }
 
   @override
@@ -172,6 +173,8 @@ class ScreenLoginState extends State<ScreenLogin> {
                                 ///titleText: getTranslate(APPStrings.textEnterMobileNumber)!,
                                 ///errorText: isLastNameError.value,
                                 hintText: getTranslate(APPStrings.textEnterMobileNumber)!,
+                                keyboardType: const TextInputType.numberWithOptions(
+                                    signed: false, decimal: false),
                                 textInputAction: TextInputAction.done,
                                 onChange: () {},
                               ),
@@ -198,7 +201,8 @@ class ScreenLoginState extends State<ScreenLogin> {
         });
   }
 
-  showAlertDialog(BuildContext context) {
+  /// Showing a dialog with a list of countries.
+  void showAlertDialog(BuildContext context) {
     final rootContext = context.findRootAncestorStateOfType<NavigatorState>()!.context;
     showDialog(
         context: rootContext,
@@ -227,6 +231,7 @@ class ScreenLoginState extends State<ScreenLogin> {
         });
   }
 
+  /// A function that is called when the user clicks the login button.
   void loginValidation() async {
     String mNumber = mobileNumberController.text.toString().trim();
     if (countryController.text.toString().isEmpty) {

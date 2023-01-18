@@ -1,3 +1,4 @@
+/// A Dart class that is used to parse the JSON response from the API.
 class ModelCountryList {
   List<CountryList>? countryList;
 
@@ -21,6 +22,8 @@ class ModelCountryList {
   }
 }
 
+/// A class that contains a list of countries.
+/// A class that is used to parse the JSON data.
 class CountryList {
   String? countryCode;
   String? countryName;

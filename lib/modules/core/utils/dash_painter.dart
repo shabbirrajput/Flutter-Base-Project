@@ -2,6 +2,8 @@ part of 'dotted_border.dart';
 
 typedef PathBuilder = Path Function(Size);
 
+/// It takes a [Path] and draws a dashed line on it
+/// > This class is a custom painter that draws a dart
 class _DashPainter extends CustomPainter {
   final double strokeWidth;
   final List<double> dashPattern;
