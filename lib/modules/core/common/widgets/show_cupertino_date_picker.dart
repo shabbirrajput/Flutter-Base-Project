@@ -119,7 +119,8 @@ void showCupertinoDatePicker(
             onDateTimeChanged: (DateTime value) {
               if (onDateTimeChanged == null) return;
               if (mode == CupertinoDatePickerMode.time) {
-                onDateTimeChanged(DateTime(0000, 01, 01, value.hour, value.minute));
+                onDateTimeChanged(
+                    DateTime(0000, 01, 01, value.hour, value.minute));
               } else {
                 onDateTimeChanged(value);
               }
@@ -138,6 +139,6 @@ void showCupertinoDatePicker(
     ),
     filter: filter,
     useRootNavigator: useRootNavigator,
-    semanticsDismissible: semanticsDismissible,
+    /* semanticsDismissible: semanticsDismissible,*/
   );
 }
